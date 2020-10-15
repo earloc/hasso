@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
@@ -10,7 +11,12 @@ namespace Hasso.Cli.Split
     {
         public Task<IEnumerable<object>> SplitAsync(FileInfo inputFile)
         {
-            return Task.FromResult(Enumerable.Range(0, 2).Cast<object>());
+            var deserializer = new DeserializerBuilder().Build();
+            using var reader = inputFile.OpenText();
+
+            var content = deserializer.Deserialize(reader) as Dictionary<object, object>;
+
+            return Task.FromResult(content.Values.AsEnumerable());
         }
     }
 }
