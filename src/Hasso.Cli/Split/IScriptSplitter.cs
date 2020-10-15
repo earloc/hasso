@@ -7,10 +7,10 @@ namespace Hasso.Cli
 {
     public interface IScriptSplitter
     {
-        public Task<IEnumerable<object>> SplitAsync(string inputFileName)
+        public Task<IEnumerable<Fragment>> SplitAsync(string inputFileName)
             => SplitAsync(new FileInfo(inputFileName));
 
-        public Task<IEnumerable<object>> SplitAsync(FileInfo inputFile);
+        public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile);
 
     }
 }
