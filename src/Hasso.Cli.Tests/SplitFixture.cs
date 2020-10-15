@@ -2,6 +2,6 @@
 {
     public class SplitFixture
     {
-
+        public IScriptSplitter ScriptSplitter { get; internal set; }
     }
 }
