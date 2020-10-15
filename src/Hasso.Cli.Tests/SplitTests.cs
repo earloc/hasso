@@ -28,5 +28,17 @@ namespace Hasso.Cli.Tests.Scripts
                 .Be(expectedSplittedFileCount, $"the given input file '{inputFileName}' is expected to contain a total of '{expectedSplittedFileCount}' scripts");
         }
 
+        [Theory]
+        [InlineData("scripts.yaml", 0, "some_script_name_1")]
+        [InlineData("scripts.yaml", 1, "some_script_name_2")]
+        public async Task Scripts_Are_Parsed_With_Their_Correct_Name(string inputFileName, int index, string expectedName)
+        {
+            var sut = this.fixture.ScriptSplitter;
+
+            var fragments = await sut.SplitAsync(inputFileName);
+
+            fragments.ToArray()[index].Name.Should().Be(expectedName);
+                
+        }
     }
 }
