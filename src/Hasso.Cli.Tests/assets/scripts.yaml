@@ -1,0 +1,36 @@
+some_script_name_1:
+  alias: Some.Script.Name 1
+  sequence:
+  - type: turn_on
+    device_id: 1xDEADBEEF
+    entity_id: light.office_1
+    domain: light
+    brightness_pct: 10
+  - delay: '30'
+  - repeat:
+      count: '10'
+      sequence:
+      - type: brightness_increase
+        device_id: 1xDEADBEEF
+        entity_id: light.office_1
+        domain: light
+      - delay: '30'
+  mode: restart
+some_script_name_2:
+  alias: Some.Script.Name 2
+  sequence:
+  - type: turn_on
+    device_id: 2xDEADBEEF
+    entity_id: light.office_2
+    domain: light
+    brightness_pct: 10
+  - delay: '30'
+  - repeat:
+      count: '10'
+      sequence:
+      - type: brightness_increase
+        device_id: 2xDEADBEEF
+        entity_id: light.office_2
+        domain: light
+      - delay: '30'
+  mode: restart
