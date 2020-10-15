@@ -16,14 +16,14 @@ namespace Hasso.Cli.Split
 
             var content = deserializer.Deserialize(reader) as Dictionary<object, object>;
 
-            return Task.FromResult(new[] { 
-                new Fragment {
-                    Name = "some_script_name_1"
-                },
-                new Fragment {
-                    Name = "some_script_name_2"
-                }
-            }.AsEnumerable());
+            return Task.FromResult(
+                content.Select(
+                    _ => new Fragment { 
+                        Name = _.Key as string,
+                        Content = _.Value
+                    }
+                )
+            );
         }
     }
 }
