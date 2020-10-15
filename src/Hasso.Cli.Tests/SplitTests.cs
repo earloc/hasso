@@ -38,7 +38,6 @@ namespace Hasso.Cli.Tests.Scripts
             var fragments = await sut.SplitAsync(inputFileName);
 
             fragments.ToArray()[index].Name.Should().Be(expectedName);
-                
         }
     }
 }
