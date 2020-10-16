@@ -7,9 +7,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddScriptsSplitter(this IServiceCollection that)
+        public static IServiceCollection AddSplitters(this IServiceCollection that)
         {
             that.AddSingleton<IScriptSplitter, YamlScriptSplitter>();
+            that.AddSingleton<ISceneSplitter, YamlSceneSplitter>();
+
             that.AddSingleton<IFragmentWriter, YamlFragmentWriter>();
             return that;
         }

@@ -13,18 +13,26 @@ namespace Hasso.Cli
             Directory.SetCurrentDirectory(args.First());
 
             var services = new ServiceCollection();
-            services.AddScriptsSplitter();
+            services.AddSplitters();
             var provider = services.BuildServiceProvider();
 
 
-            var scriptSplitter = provider.GetRequiredService<IScriptSplitter>();
-            var scriptFragments = await scriptSplitter.SplitAsync("scripts.yaml");
+            var scriptFragments = await provider
+                .GetRequiredService<IScriptSplitter>()
+                .SplitAsync("scripts.yaml");
+
+            var sceneFragments = await provider
+                .GetRequiredService<IScriptSplitter>()
+                .SplitAsync("scenes.yaml");
 
             var writer = provider.GetRequiredService<IFragmentWriter>();
 
-            var files = await writer.WriteAsync(new DirectoryInfo("Scripts"), scriptFragments);
+            var scripts = await writer.WriteAsync(new DirectoryInfo("Scripts"), scriptFragments);
+            var scenes = await writer.WriteAsync(new DirectoryInfo("Scenes"), sceneFragments);
 
-            foreach(var file in files)
+            var files = scripts.Concat(scenes);
+
+            foreach (var file in files)
                 Console.WriteLine(file.FullName);
 
 
