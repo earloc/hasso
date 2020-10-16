@@ -4,19 +4,27 @@ using Hasso.Cli.Split;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class IServiceCollectionExtensions
+    internal static class IServiceCollectionExtensions
     {
         public static IServiceCollection AddSplitters(this IServiceCollection that)
         {
-            that.AddSingleton<IScriptSplitter, YamlScriptSplitter>();
-            that.AddSingleton<ISceneSplitter, YamlSceneSplitter>();
-            that.AddSingleton<IAutomationSplitter, YamlAutomationSplitter>();
+            that.AddTransient<IScriptSplitter, YamlScriptSplitter>();
+            that.AddTransient<ISceneSplitter, YamlSceneSplitter>();
+            that.AddTransient<IAutomationSplitter, YamlAutomationSplitter>();
+
 
             return that;
         }
         public static IServiceCollection AddFragmentWriter(this IServiceCollection that)
         {
-            that.AddSingleton<IFragmentWriter, YamlFragmentWriter>();
+            that.AddTransient<IFragmentWriter, YamlFragmentWriter>();
+
+            return that;
+        }
+
+        public static IServiceCollection AddCommandHandlers(this IServiceCollection that)
+        {
+            that.AddTransient<SplitCommandHandler, SplitCommandHandler>();
 
             return that;
         }

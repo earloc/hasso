@@ -2,7 +2,7 @@
 
 namespace Hasso.Cli
 {
-    public class Fragment
+    internal class Fragment
     {
         public string? Name { get; set; } = null;
         public Dictionary<object, object> Content { get; set; } = new Dictionary<object, object>();

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Hasso.Cli
 {
-    public interface IScriptSplitter
+    internal interface IScriptSplitter
     {
         public Task<IEnumerable<Fragment>> SplitAsync(string inputFileName)
             => SplitAsync(new FileInfo(inputFileName));

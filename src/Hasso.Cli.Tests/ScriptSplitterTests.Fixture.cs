@@ -4,6 +4,6 @@ namespace Hasso.Cli.Tests.Scripts
 {
     public class ScriptSplitterTestsFixture
     {
-        public IScriptSplitter SystemUnderTest { get; internal set; } = new YamlScriptSplitter();
+        internal IScriptSplitter SystemUnderTest { get; private set; } = new YamlScriptSplitter();
     }
 }

@@ -5,7 +5,7 @@
     },
     "Split": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\temp\\hasso"
+      "commandLineArgs": "fass! --working-directory c:\\temp\\hasso"
     }
   }
 }

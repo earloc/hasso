@@ -7,7 +7,7 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    public class YamlSceneSplitter : ISceneSplitter
+    internal class YamlSceneSplitter : ISceneSplitter
     {
         public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile)
         {
