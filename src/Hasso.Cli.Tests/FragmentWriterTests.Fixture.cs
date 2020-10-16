@@ -1,7 +1,9 @@
-﻿namespace Hasso.Cli.Tests
+﻿using System.IO;
+
+namespace Hasso.Cli.Tests
 {
     public class FragmentWriterFixture
     {
-        public IFragmentWriter FragmentWriter { get; internal set; } = new YamlFragmentWriter();
+        public IFragmentWriter FragmentWriter { get; internal set; } = new YamlFragmentWriter(new DirectoryInfo("Scripts"));
     }
 }
