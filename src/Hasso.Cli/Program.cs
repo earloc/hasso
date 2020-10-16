@@ -22,9 +22,12 @@ namespace Hasso.Cli
 
             var writer = provider.GetRequiredService<IFragmentWriter>();
 
-            await writer.WriteAsync(new DirectoryInfo("Scripts"), scriptFragments);
+            var files = await writer.WriteAsync(new DirectoryInfo("Scripts"), scriptFragments);
 
-            Console.WriteLine("Hello World!");
+            foreach(var file in files)
+                Console.WriteLine(file.FullName);
+
+
         }
     }
 }
