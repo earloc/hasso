@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Hasso.Cli
 {
-    public interface ISceneSplitter
+    internal interface ISceneSplitter
     {
         public Task<IEnumerable<Fragment>> SplitAsync(string inputFileName)
             => SplitAsync(new FileInfo(inputFileName));

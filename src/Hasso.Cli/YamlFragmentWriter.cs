@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli
 {
-    public class YamlFragmentWriter : IFragmentWriter
+    internal class YamlFragmentWriter : IFragmentWriter
     {
         public Task<IEnumerable<FileInfo>> WriteAsync(DirectoryInfo baseDirectory, IEnumerable<Fragment> fragments)
         {

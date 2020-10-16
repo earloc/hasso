@@ -4,7 +4,7 @@ using Hasso.Cli.Split;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class IServiceCollectionExtensions
+    internal static class IServiceCollectionExtensions
     {
         public static IServiceCollection AddSplitters(this IServiceCollection that)
         {
