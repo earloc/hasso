@@ -1,0 +1,23 @@
+name: .NET Core
+
+on:
+  pull_request:
+    branches: 
+      - main
+  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.402
+    - name: Build with dotnet
+      run: dotnet pack src/Hasso.sln --configuration Release
+    - name: Test with dotnet
+      run: dotnet test src/Hasso.sln --configuration Release --no-build
