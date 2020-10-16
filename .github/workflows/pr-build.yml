@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.402
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore src/Hasso.sln
     - name: Build with dotnet
       run: dotnet build src/Hasso.sln --configuration Release --no-restore
     - name: Test with dotnet
