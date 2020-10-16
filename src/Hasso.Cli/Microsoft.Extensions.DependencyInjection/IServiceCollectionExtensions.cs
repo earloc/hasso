@@ -1,7 +1,6 @@
 ﻿
 using Hasso.Cli;
 using Hasso.Cli.Split;
-using System.IO;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,10 +10,15 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             that.AddSingleton<IScriptSplitter, YamlScriptSplitter>();
             that.AddSingleton<ISceneSplitter, YamlSceneSplitter>();
+            that.AddSingleton<IAutomationSplitter, YamlAutomationSplitter>();
 
-            that.AddSingleton<IFragmentWriter, YamlFragmentWriter>();
             return that;
         }
+        public static IServiceCollection AddFragmentWriter(this IServiceCollection that)
+        {
+            that.AddSingleton<IFragmentWriter, YamlFragmentWriter>();
 
+            return that;
+        }
     }
 }
