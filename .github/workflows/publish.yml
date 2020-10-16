@@ -26,4 +26,4 @@ jobs:
     - name: Pack with dotnet
       run: dotnet pack src/Hasso.sln --configuration Release --no-build
     - name: publish to nuget
-      run: dotnet nuget push src/bin/nupkg/*.nupkg --api-key ${{secrets.NUGET_APIKEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push src/Hasso.Cli/bin/nupkg/*.nupkg --api-key ${{secrets.NUGET_APIKEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
