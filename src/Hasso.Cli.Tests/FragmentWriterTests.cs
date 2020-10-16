@@ -31,7 +31,7 @@ namespace Hasso.Cli.Tests
             };
 
             var writer = fixture.FragmentWriter;
-            
+
             var files = await writer.WriteAsync(new DirectoryInfo("testOutput"), fragments);
 
             files.Count()

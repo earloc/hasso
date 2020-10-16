@@ -17,9 +17,15 @@ namespace Hasso.Cli.Split
 
             return Task.FromResult(
                 content.Select(
-                    _ => new Fragment { 
-                        Name = _.Key as string,
-                        Content = new Dictionary<object, object> { {_.Key, _.Value } }
+                    _ =>
+                    {
+                        var name = _.Key as string;
+                        if (name is null) throw new InvalidOperationException("Could not find a scipt´s name");
+                        return new Fragment
+                        {
+                            Name = _.Key as string,
+                            Content = new Dictionary<object, object> { { _.Key, _.Value } }
+                        };
                     }
                 ).ToArray().AsEnumerable()
             );

@@ -25,7 +25,7 @@ namespace Hasso.Cli.Split
                             Name = name,
                             Content = new Dictionary<object, object> { { name, item } }
                         };
-                            
+
                     }
                 ).ToArray().AsEnumerable()
             );
@@ -35,7 +35,9 @@ namespace Hasso.Cli.Split
         {
             var content = key as Dictionary<object, object>;
 
-            var name = content["alias"] as string;
+            var name = content?["alias"] as string;
+
+            if (name is null) throw new InvalidOperationException("Could not locate an automation´s name");
 
             return name;
         }

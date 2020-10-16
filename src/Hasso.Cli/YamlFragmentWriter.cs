@@ -14,7 +14,8 @@ namespace Hasso.Cli
 
             var serializer = new SerializerBuilder().Build();
 
-            var tasks = fragments.Select(_ => {
+            var tasks = fragments.Select(_ =>
+            {
                 var targetFileName = Path.Combine(baseDirectory.FullName, $"{_.Name}.partial.yaml");
                 var targetFile = new FileInfo(targetFileName);
                 using var writer = File.CreateText(targetFile.FullName);

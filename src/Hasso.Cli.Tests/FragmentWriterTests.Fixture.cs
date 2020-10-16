@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Hasso.Cli.Tests
+﻿namespace Hasso.Cli.Tests
 {
     public class FragmentWriterFixture
     {
