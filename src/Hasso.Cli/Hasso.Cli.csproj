@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <!--common-->
   <PropertyGroup> 
@@ -44,7 +44,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>-->
-    <None Include="..\LICENSE" Link="LICENSE">
+    <None Include="../LICENSE" Link="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
