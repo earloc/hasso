@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -30,7 +31,7 @@ namespace Hasso.Cli.Tests
 
             var writer = fixture.FragmentWriter;
             
-            var files = await writer.WriteAsync(fragments);
+            var files = await writer.WriteAsync(new DirectoryInfo("testOutput"), fragments);
 
             files.Count()
                 .Should()

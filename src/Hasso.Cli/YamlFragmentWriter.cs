@@ -4,19 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 
-namespace Hasso.Cli.Tests
+namespace Hasso.Cli
 {
     public class YamlFragmentWriter : IFragmentWriter
     {
-        private readonly DirectoryInfo baseDirectory;
-
-        public YamlFragmentWriter(DirectoryInfo baseDirectory) 
-            => this.baseDirectory = baseDirectory;
-
-        public Task<IEnumerable<FileInfo>> WriteAsync(IEnumerable<Fragment> fragments)
+        public Task<IEnumerable<FileInfo>> WriteAsync(DirectoryInfo baseDirectory, IEnumerable<Fragment> fragments)
         {
-            if (!baseDirectory.Exists) 
-                baseDirectory.Create();
+            if (!baseDirectory.Exists) baseDirectory.Create();
 
             var serializer = new SerializerBuilder().Build();
 
