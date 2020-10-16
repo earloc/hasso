@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,16 +14,30 @@ namespace Hasso.Cli.Split
             var deserializer = new DeserializerBuilder().Build();
             using var reader = inputFile.OpenText();
 
-            var content = deserializer.Deserialize(reader) as Dictionary<object, object>;
+            var content = deserializer.Deserialize(reader) as List<object>;
 
             return Task.FromResult(
-                content.Select(
-                    _ => new Fragment { 
-                        Name = _.Key as string,
-                        Content = new Dictionary<object, object> { {_.Key, _.Value } }
+                content.Select(item =>
+                    {
+                        var name = ResolveNameOf(item);
+                        return new Fragment
+                        {
+                            Name = name,
+                            Content = new Dictionary<object, object> { { name, item } }
+                        };
+                            
                     }
                 )
             );
+        }
+
+        private string ResolveNameOf(object key)
+        {
+            var content = key as Dictionary<object, object>;
+
+            var name = content["name"] as string;
+
+            return name;
         }
     }
 }
