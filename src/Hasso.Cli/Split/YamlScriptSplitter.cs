@@ -21,7 +21,7 @@ namespace Hasso.Cli.Split
                         Name = _.Key as string,
                         Content = new Dictionary<object, object> { {_.Key, _.Value } }
                     }
-                )
+                ).ToArray().AsEnumerable()
             );
         }
     }

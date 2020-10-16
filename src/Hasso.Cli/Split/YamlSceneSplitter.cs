@@ -27,7 +27,7 @@ namespace Hasso.Cli.Split
                         };
                             
                     }
-                )
+                ).ToArray().AsEnumerable()
             );
         }
 

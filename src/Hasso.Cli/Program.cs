@@ -22,7 +22,7 @@ namespace Hasso.Cli
                 .SplitAsync("scripts.yaml");
 
             var sceneFragments = await provider
-                .GetRequiredService<IScriptSplitter>()
+                .GetRequiredService<ISceneSplitter>()
                 .SplitAsync("scenes.yaml");
 
             var writer = provider.GetRequiredService<IFragmentWriter>();
