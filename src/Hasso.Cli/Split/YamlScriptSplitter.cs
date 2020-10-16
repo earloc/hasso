@@ -20,7 +20,7 @@ namespace Hasso.Cli.Split
                 content.Select(
                     _ => new Fragment { 
                         Name = _.Key as string,
-                        Content = content
+                        Content = new Dictionary<object, object> { {_.Key, _.Value } }
                     }
                 )
             );
