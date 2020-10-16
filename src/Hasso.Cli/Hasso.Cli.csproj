@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--common-->
+  <PropertyGroup> 
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>hasso</AssemblyName>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!--package-->
+  
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dotnet-hasso</ToolCommandName>
+    <PackageOutputPath>./bin/nupkg</PackageOutputPath>
+    <PackageId>Hasso</PackageId>
+    <Authors>earloc</Authors>
+    <Company>eSc</Company>
+    <Product>dotnet-hasso</Product>
+    <PackageProjectUrl>https://github.com/earloc/Hasso</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/earloc/Hasso</RepositoryUrl>
+    <PackageTags>hass.io HomeAssistant organizer CLI</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryType>github</RepositoryType>
+    <Description>HomeAssistent / hass.io organizer for yaml-configurations</Description>
+    <PackageIcon></PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+  
+  <!--versioning-->
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <Copyright>earloc</Copyright>
+    <PackageReleaseNotes>
+      0.1.0 - Initial release
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--<None Include="..\assets\package.png" Link="package.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>-->
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="YamlDotNet" Version="8.1.2" />
+  </ItemGroup>
+
+</Project>

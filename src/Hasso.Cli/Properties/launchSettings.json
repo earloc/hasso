@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Hasso.Cli": {
+      "commandName": "Project"
+    },
+    "Split": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\temp\\hasso"
+    }
+  }
+}
