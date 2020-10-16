@@ -45,7 +45,7 @@ namespace Hasso.Cli.Tests.Scripts
         }
 
         [Theory]
-        [InlineData("scripts.yaml")]
+        [InlineData("scenes.yaml")]
         public async Task SceneFragmentContent_Only_Contains_Single_Entry(string inputFileName)
         {
             var sut = this.fixture.SystemUnderTest;
