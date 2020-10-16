@@ -2,14 +2,9 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Hasso.Cli
+namespace Hasso.Cli.Split
 {
-    internal interface IAutomationSplitter
+    internal interface IAutomationSplitter : ISplitter
     {
-        public Task<IEnumerable<Fragment>> SplitAsync(string inputFileName)
-            => SplitAsync(new FileInfo(inputFileName));
-
-        public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile);
-
     }
 }

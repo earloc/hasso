@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,26 +10,40 @@ namespace Hasso.Cli.Split
 {
     internal class YamlAutomationSplitter : IAutomationSplitter
     {
-        public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile)
+        private readonly ILogger logger;
+
+        public YamlAutomationSplitter(ILogger logger)
         {
+            this.logger = logger;
+        }
+        public async Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile)
+        {
+            logger.Information("looking for automation-configuration: '{inputFile}'.", inputFile);
+
+            if (!inputFile.Exists)
+            {
+                logger.Warning("could not find automation-configuration, skipping.");
+                return null;
+            }
             var deserializer = new DeserializerBuilder().Build();
+
             using var reader = inputFile.OpenText();
 
             var content = deserializer.Deserialize<List<object>>(reader);
 
-            return Task.FromResult(
-                content.Select(item =>
-                    {
-                        var name = ResolveNameOf(item);
-                        return new Fragment
-                        {
-                            Name = name,
-                            Content = new Dictionary<object, object> { { name, item } }
-                        };
+            await Task.CompletedTask;
 
-                    }
-                ).ToArray().AsEnumerable()
-            );
+            var fragments = content.Select(item =>
+            {
+                var name = ResolveNameOf(item);
+                return new Fragment
+                {
+                    Name = name,
+                    Content = new Dictionary<object, object> { { name, item } }
+                };
+            });
+
+            return fragments.ToArray().AsEnumerable();
         }
 
         private string ResolveNameOf(object key)
