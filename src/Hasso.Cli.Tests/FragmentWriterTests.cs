@@ -12,7 +12,7 @@ namespace Hasso.Cli.Tests
             this.fixture = fixture;
         }
 
-        [Theory]
+        [Fact]
         public async Task Writes_Script_Fragments_To_Target_Files()
         {
             var fragments = new[] {
