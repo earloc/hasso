@@ -17,7 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.402
+    - name: Install dependencies
+      run: dotnet restore
     - name: Build with dotnet
-      run: dotnet pack src/Hasso.sln --configuration Release
+      run: dotnet build src/Hasso.sln --configuration Release --no-restore
     - name: Test with dotnet
-      run: dotnet test src/Hasso.sln --configuration Release --no-build
+      run: dotnet test src/Hasso.sln --configuration Release --no-build --verbosity normal
