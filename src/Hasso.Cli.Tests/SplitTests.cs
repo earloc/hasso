@@ -21,9 +21,9 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.ScriptSplitter;
 
-            var fragments = await sut.SplitAsync(inputFileName);
+            var actual = await sut.SplitAsync(inputFileName);
 
-            fragments.Count()
+            actual.Count()
                 .Should()
                 .Be(expectedSplittedFileCount, $"the given input file '{inputFileName}' is expected to contain a total of '{expectedSplittedFileCount}' scripts");
         }
@@ -35,9 +35,11 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.ScriptSplitter;
 
-            var fragments = await sut.SplitAsync(inputFileName);
+            var actual = await sut.SplitAsync(inputFileName);
 
-            fragments.ToArray()[index].Name.Should().Be(expectedName);
+            actual.ToArray()[index].Name
+                .Should()
+                .Be(expectedName, "that is what the test-data says");
         }
     }
 }
