@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hasso.Cli.Tests
@@ -8,7 +9,7 @@ namespace Hasso.Cli.Tests
     {
         public Task<IEnumerable<FileInfo>> WriteAsync(IEnumerable<Fragment> fragments)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(new FileInfo[2].AsEnumerable());
         }
     }
 }
