@@ -17,7 +17,7 @@ namespace Hasso.Cli.Tests.Scripts
 
         [Theory]
         [InlineData("scripts.yaml", 2)]
-        public async Task Scripts_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedFileCount)
+        public async Task Scripts_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedItemCount)
         {
             var sut = this.fixture.SystemUnderTest;
 
@@ -26,7 +26,7 @@ namespace Hasso.Cli.Tests.Scripts
             var actual = fragments.Count();
 
             actual.Should()
-                .Be(expectedSplittedFileCount, $"the given input file '{inputFileName}' is expected to contain a total of '{expectedSplittedFileCount}' scripts");
+                .Be(expectedSplittedItemCount, $"the given input file '{inputFileName}' is expected to contain a total of '{expectedSplittedItemCount}' scripts");
         }
 
         [Theory]
@@ -46,7 +46,7 @@ namespace Hasso.Cli.Tests.Scripts
 
         [Theory]
         [InlineData("scripts.yaml")]
-        public async Task FragmentContent_Only_Contains_Single_Entry(string inputFileName)
+        public async Task ScriptFragmentContent_Only_Contains_Single_Entry(string inputFileName)
         {
             var sut = this.fixture.SystemUnderTest;
 
