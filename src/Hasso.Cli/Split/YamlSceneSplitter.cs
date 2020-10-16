@@ -14,7 +14,7 @@ namespace Hasso.Cli.Split
             var deserializer = new DeserializerBuilder().Build();
             using var reader = inputFile.OpenText();
 
-            var content = deserializer.Deserialize(reader) as List<object>;
+            var content = deserializer.Deserialize<List<object>>(reader);
 
             return Task.FromResult(
                 content.Select(item =>

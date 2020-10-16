@@ -13,8 +13,7 @@ namespace Hasso.Cli.Split
         {
             var deserializer = new DeserializerBuilder().Build();
             using var reader = inputFile.OpenText();
-
-            var content = deserializer.Deserialize(reader) as Dictionary<object, object>;
+            var content = deserializer.Deserialize<Dictionary<object, object>>(reader);
 
             return Task.FromResult(
                 content.Select(
