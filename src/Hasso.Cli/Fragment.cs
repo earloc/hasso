@@ -7,6 +7,6 @@ namespace Hasso.Cli
     public class Fragment
     {
         public string Name { get; set; }
-        public object Content { get; set; }
+        public Dictionary<object, object> Content { get; set; }
     }
 }

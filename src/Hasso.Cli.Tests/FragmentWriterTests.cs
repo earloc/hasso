@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,11 +22,11 @@ namespace Hasso.Cli.Tests
             var fragments = new[] {
                 new Fragment {
                     Name = "some_script_name_1",
-                    Content = "some_script_name_1: some value"
+                    Content = new Dictionary<object, object> { {"some_script_name_1", "some value" } }
                 },
                 new Fragment {
                     Name = "some_script_name_2",
-                    Content = "some_script_name_2: some other value"
+                    Content = new Dictionary<object, object> { {"some_script_name_2", "some other value" } }
                 }
             };
 

@@ -20,9 +20,8 @@ namespace Hasso.Cli
                 using var writer = File.CreateText(targetFile.FullName);
 
                 serializer.Serialize(writer, _.Content);
-
                 return targetFile;
-            });
+            }).ToArray().AsEnumerable();
 
             return Task.FromResult(tasks);
 

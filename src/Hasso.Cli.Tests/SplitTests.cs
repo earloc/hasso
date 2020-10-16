@@ -21,10 +21,11 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.ScriptSplitter;
 
-            var actual = await sut.SplitAsync(inputFileName);
+            var fragments = await sut.SplitAsync(inputFileName);
 
-            actual.Count()
-                .Should()
+            var actual = fragments.Count();
+
+            actual.Should()
                 .Be(expectedSplittedFileCount, $"the given input file '{inputFileName}' is expected to contain a total of '{expectedSplittedFileCount}' scripts");
         }
 
@@ -35,11 +36,31 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.ScriptSplitter;
 
-            var actual = await sut.SplitAsync(inputFileName);
+            var fragments = await sut.SplitAsync(inputFileName);
 
-            actual.ToArray()[index].Name
-                .Should()
+            var actual = fragments.ToArray()[index].Name;
+
+            actual.Should()
                 .Be(expectedName, "that is what the test-data says");
+        }
+
+        [Theory]
+        [InlineData("scripts.yaml")]
+        public async Task FragmentContent_Only_Contains_Single_Entry(string inputFileName)
+        {
+            var sut = this.fixture.ScriptSplitter;
+
+            var fragments = await sut.SplitAsync(inputFileName);
+
+
+            foreach (var fragment in fragments)
+            {
+                var actual = fragment.Content;
+                actual.Count
+                    .Should()
+                    .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
+            }
+
         }
     }
 }
