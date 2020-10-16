@@ -17,7 +17,7 @@
     <Authors>earloc</Authors>
     <Company>eSc</Company>
     <Product>dotnet-hasso</Product>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/earloc/Hasso</PackageProjectUrl>
     <RepositoryUrl>https://github.com/earloc/Hasso</RepositoryUrl>
     <PackageTags>hass.io HomeAssistant organizer CLI</PackageTags>
@@ -44,7 +44,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>-->
-    <None Include="..\LICENSE.md" Link="LICENSE.md">
+    <None Include="..\LICENSE" Link="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
