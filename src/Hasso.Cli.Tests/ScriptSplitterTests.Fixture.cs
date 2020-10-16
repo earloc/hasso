@@ -2,7 +2,7 @@
 
 namespace Hasso.Cli.Tests.Scripts
 {
-    public class SplitFixture
+    public class ScriptSplitterTestsFixture
     {
         public IScriptSplitter ScriptSplitter { get; internal set; } = new YamlScriptSplitter();
     }

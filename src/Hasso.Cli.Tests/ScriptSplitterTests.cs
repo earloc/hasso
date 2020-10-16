@@ -6,11 +6,11 @@ using Xunit;
 namespace Hasso.Cli.Tests.Scripts
 {
 
-    public class SplitTests : IClassFixture<SplitFixture>
+    public class ScriptSplitterTests : IClassFixture<ScriptSplitterTestsFixture>
     {
-        private readonly SplitFixture fixture;
+        private readonly ScriptSplitterTestsFixture fixture;
 
-        public SplitTests(SplitFixture fixture)
+        public ScriptSplitterTests(ScriptSplitterTestsFixture fixture)
         {
             this.fixture = fixture;
         }
