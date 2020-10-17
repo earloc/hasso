@@ -7,17 +7,22 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlSceneSplitter : ISceneSplitter
+    internal class YamlSceneSplitter : ISplitter
     {
-        public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile)
+
+        public string SourceName => "scenes";
+
+
+        public async Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile)
         {
             var deserializer = new DeserializerBuilder().Build();
             using var reader = inputFile.OpenText();
 
             var content = deserializer.Deserialize<List<object>>(reader);
 
-            return Task.FromResult(
-                content.Select(item =>
+            await Task.CompletedTask;
+
+            var fragments = content.Select(item =>
                     {
                         var name = ResolveNameOf(item);
                         return new Fragment
@@ -27,8 +32,9 @@ namespace Hasso.Cli.Split
                         };
 
                     }
-                ).ToArray().AsEnumerable()
-            );
+                );
+
+            return fragments.ToArray().AsEnumerable();
         }
 
         private string ResolveNameOf(object key)

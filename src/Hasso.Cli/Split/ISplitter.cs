@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasso.Cli.Split
 {
     internal interface ISplitter
     {
-        public Task<IEnumerable<Fragment>?> SplitAsync(string inputFileName)
-            => SplitAsync(new FileInfo(inputFileName));
-
+        public string SourceName { get; }
+        public Task<IEnumerable<Fragment>?> SplitAsync(DirectoryInfo directory)
+        {
+            var inputFile = new FileInfo(Path.Combine(directory.FullName, $"{SourceName}.yaml"));
+            return SplitAsync(inputFile);
+        }
         public Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile);
     }
 }

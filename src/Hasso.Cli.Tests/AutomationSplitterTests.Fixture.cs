@@ -1,9 +1,10 @@
 ﻿using Hasso.Cli.Split;
+using Serilog;
 
 namespace Hasso.Cli.Tests.Scripts
 {
     public class AutomationSplitterTestsFixture
     {
-        internal IAutomationSplitter SystemUnderTest { get; private set; } = new YamlAutomationSplitter();
+        internal ISplitter SystemUnderTest { get; private set; } = new YamlAutomationSplitter(Log.Logger);
     }
 }

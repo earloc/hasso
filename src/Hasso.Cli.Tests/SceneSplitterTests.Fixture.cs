@@ -4,6 +4,6 @@ namespace Hasso.Cli.Tests.Scripts
 {
     public class SceneSplitterTestsFixture
     {
-        internal ISceneSplitter SystemUnderTest { get; private set; } = new YamlSceneSplitter();
+        internal ISplitter SystemUnderTest { get; private set; } = new YamlSceneSplitter();
     }
 }

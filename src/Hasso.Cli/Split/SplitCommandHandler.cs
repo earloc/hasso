@@ -1,23 +1,21 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hasso.Cli.Split
 {
     class SplitCommandHandler
     {
-        private readonly IScriptSplitter scriptSplitter;
-        private readonly ISceneSplitter sceneSplitter;
-        private readonly IAutomationSplitter automationSplitter;
+        private readonly ISplitter[] splitters;
         private readonly IFragmentWriter fragmentWriter;
+        private readonly ILogger logger;
 
-        public SplitCommandHandler(IScriptSplitter scriptSplitter, ISceneSplitter sceneSplitter, IAutomationSplitter automationSplitter, IFragmentWriter fragmentWriter)
+        public SplitCommandHandler(ISplitter[] splitters, IFragmentWriter fragmentWriter, ILogger logger)
         {
-            this.scriptSplitter = scriptSplitter;
-            this.sceneSplitter = sceneSplitter;
-            this.automationSplitter = automationSplitter;
+            this.splitters = splitters;
             this.fragmentWriter = fragmentWriter;
+            this.logger = logger;
         }
 
         public Task ExecuteAsync(string? workingDirectory = null)
@@ -36,27 +34,40 @@ namespace Hasso.Cli.Split
             {
                 var directory = new DirectoryInfo(Path.Combine(baseDirectory.FullName, path));
                 if (!directory.Exists)
+                {
+                    logger.Information($"creating directory '{directory.FullName}'");
                     directory.Create();
+                }
 
                 return directory;
             }
 
-            var scriptFragments = await scriptSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scripts.yaml"));
-            var scriptsDirectory = EnsureDirectory(workingDirectory, "scripts");
-            var scripts = await fragmentWriter.WriteAsync(scriptsDirectory, scriptFragments);
 
-            var sceneFragments = await sceneSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scenes.yaml"));
-            var sceneDirectory = EnsureDirectory(workingDirectory, "scenes");
-            var scenes = await fragmentWriter.WriteAsync(sceneDirectory, sceneFragments);
+            foreach (var splitter in splitters)
+            {
+                var fragments = await splitter.SplitAsync(workingDirectory);
+                if (fragments is null)
+                {
+                    logger.Warning($"skipping '{splitter.SourceName}'");
+                    continue;
+                }
+                var directory = EnsureDirectory(workingDirectory, splitter.SourceName);
+                await fragmentWriter.WriteAsync(directory, fragments);
+            }
 
-            var automationFragments = await automationSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "automations.yaml"));
-            var automationsDirectory = EnsureDirectory(workingDirectory, "automations");
-            var automations = await fragmentWriter.WriteAsync(automationsDirectory, automationFragments);
+            //var scriptFragments = await scriptSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scripts.yaml"));
+            //var scriptsDirectory = EnsureDirectory(workingDirectory, "scripts");
+            //var scripts = await fragmentWriter.WriteAsync(scriptsDirectory, scriptFragments);
 
-            var files = scripts.Concat(scenes).Concat(automations);
+            //var sceneFragments = await sceneSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scenes.yaml"));
+            //var sceneDirectory = EnsureDirectory(workingDirectory, "scenes");
+            //var scenes = await fragmentWriter.WriteAsync(sceneDirectory, sceneFragments);
 
-            foreach (var file in files)
-                Console.WriteLine(file.FullName);
+            //var automationFragments = await automationSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "automations.yaml"));
+            //var automationsDirectory = EnsureDirectory(workingDirectory, "automations");
+            //var automations = await fragmentWriter.WriteAsync(automationsDirectory, automationFragments);
+
+            //var files = scripts.Concat(scenes).Concat(automations);
         }
     }
 }

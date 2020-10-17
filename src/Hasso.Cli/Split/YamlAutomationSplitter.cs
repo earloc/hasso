@@ -8,7 +8,7 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlAutomationSplitter : IAutomationSplitter
+    internal class YamlAutomationSplitter : ISplitter
     {
         private readonly ILogger logger;
 
@@ -16,6 +16,9 @@ namespace Hasso.Cli.Split
         {
             this.logger = logger;
         }
+
+        public string SourceName => "automations";
+
         public async Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile)
         {
             logger.Information("looking for automation-configuration: '{inputFile}'.", inputFile);
