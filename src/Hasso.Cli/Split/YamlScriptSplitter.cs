@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,13 +8,15 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlScriptSplitter : ISplitter
+    internal class YamlScriptSplitter : YamlSplitterBase
     {
+        public YamlScriptSplitter(ILogger logger) : base(logger)
+        {
+        }
 
-        public string SourceName => "scripts";
+        public override string SourceName => "scripts";
 
-
-        public async Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile)
+        protected override async Task<IEnumerable<Fragment>?> SplitCoreAsync(FileInfo inputFile)
         {
             var deserializer = new DeserializerBuilder().Build();
             using var reader = inputFile.OpenText();

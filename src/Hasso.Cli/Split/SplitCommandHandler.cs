@@ -42,7 +42,6 @@ namespace Hasso.Cli.Split
                 return directory;
             }
 
-
             foreach (var splitter in splitters)
             {
                 var fragments = await splitter.SplitAsync(workingDirectory);
