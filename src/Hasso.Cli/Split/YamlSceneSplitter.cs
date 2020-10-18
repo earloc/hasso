@@ -27,16 +27,16 @@ namespace Hasso.Cli.Split
             await Task.CompletedTask;
 
             var fragments = content.Select(item =>
+                {
+                    var name = ResolveNameOf(item);
+                    return new Fragment
                     {
-                        var name = ResolveNameOf(item);
-                        return new Fragment
-                        {
-                            Name = name,
-                            Content = new Dictionary<object, object> { { name, item } }
-                        };
+                        Name = name,
+                        Content = new Dictionary<object, object> { { name, item } }
+                    };
 
-                    }
-                );
+                }
+            );
 
             return fragments.ToArray().AsEnumerable();
         }

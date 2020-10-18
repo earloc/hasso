@@ -10,10 +10,11 @@ namespace Hasso.Cli.Split
     {
         protected readonly ILogger logger;
 
-        public YamlSplitterBase(ILogger logger)
+        protected YamlSplitterBase(ILogger logger)
         {
             this.logger = logger;
         }
+
         public abstract string SourceName { get; }
 
         public Task<IEnumerable<Fragment>?> SplitAsync(DirectoryInfo directory)
