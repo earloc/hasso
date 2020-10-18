@@ -1,6 +1,6 @@
 ﻿
 using Hasso.Cli;
-wusing Hasso.Cli.Compose;
+using Hasso.Cli.Compose;
 using Hasso.Cli.Split;
 
 namespace Microsoft.Extensions.DependencyInjection
