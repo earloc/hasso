@@ -1,5 +1,6 @@
 ﻿
 using Hasso.Cli;
+wusing Hasso.Cli.Compose;
 using Hasso.Cli.Split;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -31,6 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCommandHandlers(this IServiceCollection that)
         {
             that.AddTransient<SplitCommandHandler, SplitCommandHandler>();
+            that.AddTransient<ComposeCommandHandler, ComposeCommandHandler>();
+
 
             return that;
         }

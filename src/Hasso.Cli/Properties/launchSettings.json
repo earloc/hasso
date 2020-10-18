@@ -5,11 +5,15 @@
         },
         "Split.Private": {
             "commandName": "Project",
-            "commandLineArgs": "fass! --working-directory c:\\temp\\hasso\\private"
+            "commandLineArgs": "fass! --source-directory c:\\temp\\hasso\\private"
         },
         "Split.Public": {
             "commandName": "Project",
-            "commandLineArgs": "fass! --working-directory c:\\temp\\hasso\\public"
+            "commandLineArgs": "fass! --source-directory c:\\temp\\hasso\\public"
+        },
+        "Compose.Public": {
+            "commandName": "Project",
+            "commandLineArgs": "platz! --source-directory c:\\temp\\hasso\\public --target-directory c:\\temp\\hasso\\public\\out"
         }
     }
 }

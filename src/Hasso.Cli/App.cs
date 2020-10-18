@@ -1,4 +1,5 @@
-﻿using Hasso.Cli.Split;
+﻿using Hasso.Cli.Compose;
+using Hasso.Cli.Split;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
@@ -54,6 +55,10 @@ namespace Hasso.Cli
             AddCommand<SplitCommandHandler>("split",
                 "splits monolithic yamls (scenes.yaml, scripts.yaml, ...) into many smaller ones",
                 "fass!", "explode");
+
+            AddCommand<ComposeCommandHandler>("compose",
+                "composes multiple partial-yamls into monolithic ones, ready to deploy to HA",
+                "platz!", "implode");
         }
 
 

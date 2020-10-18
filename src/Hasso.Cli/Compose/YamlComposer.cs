@@ -32,18 +32,24 @@ namespace Hasso.Cli.Compose
 
             foreach (var directory in supportedDirectories)
             {
+                logger.Information("scanning '{directory}'", directory.FullName);
                 var files = directory.GetFiles("*.partial.yaml");
                 var builder = new StringBuilder();
 
                 foreach (var file in files)
                 {
                     var content = File.ReadAllText(file.FullName);
+
+                    logger.Information("collected {FullName}", file.FullName);
+
                     builder.Append(content);
                 }
 
                 var targetFile = Path.Combine(targetDirectory.FullName, $"{directory}.yaml");
 
                 File.WriteAllText(targetFile, builder.ToString());
+                logger.Information("written {targetFile}", targetFile);
+
                 resultFiles.Add(new FileInfo(targetFile));
             }
 

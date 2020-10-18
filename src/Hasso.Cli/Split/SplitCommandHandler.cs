@@ -18,12 +18,12 @@ namespace Hasso.Cli.Split
             this.logger = logger;
         }
 
-        public Task ExecuteAsync(string? workingDirectory = null)
+        public Task ExecuteAsync(string? sourceDirectory = null)
         {
-            var directory = new DirectoryInfo(workingDirectory ?? ".");
+            var directory = new DirectoryInfo(sourceDirectory ?? ".");
 
             if (!directory.Exists)
-                throw new ArgumentException($"Could not find path'{workingDirectory}'", nameof(workingDirectory));
+                throw new ArgumentException($"Could not find path'{sourceDirectory}'", nameof(sourceDirectory));
 
             return ExecuteAsyncCore(directory);
         }
