@@ -2,11 +2,13 @@
 using Serilog;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal abstract class YamlSplitterBase : ISplitter
+    internal abstract class YamlSplitterBase<T> : ISplitter
     {
         protected readonly ILogger logger;
 
@@ -17,28 +19,18 @@ namespace Hasso.Cli.Split
 
         public abstract string SourceName { get; }
 
-        public Task<IEnumerable<Fragment>?> SplitAsync(DirectoryInfo directory)
+        public async Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile)
         {
-            var inputFile = new FileInfo(Path.Combine(directory.FullName, $"{SourceName}.yaml"));
+            var deserializer = new DeserializerBuilder().Build();
 
-            return SplitAsync(inputFile);
+            using var reader = inputFile.OpenText();
+
+            var content = await Task.Run(() => deserializer.Deserialize<T>(reader));
+
+            return Split(content)
+                .ToArray()
+                .AsEnumerable();
         }
-
-        public async Task<IEnumerable<Fragment>?> SplitAsync(FileInfo inputFile)
-        {
-            logger.Information("looking for automation-configuration: '{inputFile}'.", inputFile);
-
-            if (!inputFile.Exists)
-            {
-                logger.Warning("could not find automation-configuration, skipping.");
-                return null;
-            }
-
-            var fragments = await SplitCoreAsync(inputFile);
-
-            return fragments;
-        }
-
-        protected abstract Task<IEnumerable<Fragment>?> SplitCoreAsync(FileInfo inputFile);
+        protected abstract IEnumerable<Fragment> Split(T content);
     }
 }

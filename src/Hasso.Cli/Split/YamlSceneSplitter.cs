@@ -1,14 +1,11 @@
 ﻿using Serilog;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlSceneSplitter : YamlSplitterBase
+    internal class YamlSceneSplitter : YamlSplitterBase<List<object>>
     {
         public YamlSceneSplitter(ILogger logger) : base(logger)
         {
@@ -16,29 +13,20 @@ namespace Hasso.Cli.Split
 
         public override string SourceName => "scenes";
 
-
-        protected override async Task<IEnumerable<Fragment>?> SplitCoreAsync(FileInfo inputFile)
+        protected override IEnumerable<Fragment> Split(List<object> content)
         {
-            var deserializer = new DeserializerBuilder().Build();
-            using var reader = inputFile.OpenText();
-
-            var content = deserializer.Deserialize<List<object>>(reader);
-
-            await Task.CompletedTask;
-
             var fragments = content.Select(item =>
+            {
+                var name = ResolveNameOf(item);
+                return new Fragment
                 {
-                    var name = ResolveNameOf(item);
-                    return new Fragment
-                    {
-                        Name = name,
-                        Content = new Dictionary<object, object> { { name, item } }
-                    };
+                    Name = name,
+                    Content = new Dictionary<object, object> { { name, item } }
+                };
 
-                }
-            );
+            });
 
-            return fragments.ToArray().AsEnumerable();
+            return fragments;
         }
 
         private string ResolveNameOf(object key)
@@ -47,7 +35,7 @@ namespace Hasso.Cli.Split
 
             var name = content?["name"] as string;
 
-            if (name is null) throw new InvalidOperationException("Could not locate a scene´s name");
+            if (name is null) throw new InvalidOperationException("expected 'name'-element was not found");
 
             return name;
         }
