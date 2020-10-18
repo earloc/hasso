@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hasso.Cli.Tests.Units
+namespace Hasso.Tests.Units
 {
 
     public class ScriptSplitterTests : IClassFixture<ScriptSplitterTestsFixture>
@@ -52,7 +52,6 @@ namespace Hasso.Cli.Tests.Units
             var sut = this.fixture.SystemUnderTest;
 
             var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
-
 
             foreach (var fragment in fragments)
             {

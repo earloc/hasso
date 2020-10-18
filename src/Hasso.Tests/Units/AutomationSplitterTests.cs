@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hasso.Cli.Tests.Units
+namespace Hasso.Tests.Units
 {
 
     public class AutomationSplitterTests : IClassFixture<AutomationSplitterTestsFixture>

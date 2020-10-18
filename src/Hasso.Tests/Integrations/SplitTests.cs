@@ -40,7 +40,7 @@ namespace Hasso.Cli.Tests.Integrations
             exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
             var subDirectories = Directory.GetDirectories(".");
-            
+
             subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
 
             var files = Directory.GetFiles(subDirectory);
