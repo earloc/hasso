@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
@@ -30,7 +29,7 @@ namespace Hasso.Cli.Tests.Integrations
             }
 
             Directory.CreateDirectory(testRunId);
-            foreach (var file in Directory.GetFiles(".","*.yaml"))
+            foreach (var file in Directory.GetFiles(".", "*.yaml"))
             {
                 File.Copy(file, Path.Combine(testRunId, file));
             }
