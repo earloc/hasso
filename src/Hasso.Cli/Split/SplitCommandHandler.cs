@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hasso.Cli.Split
 {
-    class SplitCommandHandler
+    internal class SplitCommandHandler
     {
         private readonly ISplitter[] splitters;
         private readonly IFragmentWriter fragmentWriter;
@@ -51,28 +51,12 @@ namespace Hasso.Cli.Split
                     logger.Warning($"skipping '{inputFilePath}', as it was not found");
                 }
 
+                logger.Information($"reading {inputFilePath}");
                 var fragments = await splitter.SplitAsync(inputFile);
-                if (fragments is null)
-                {
-                    continue;
-                }
+
                 var directory = EnsureDirectory(workingDirectory, splitter.SourceName);
                 await fragmentWriter.WriteAsync(directory, fragments);
             }
-
-            //var scriptFragments = await scriptSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scripts.yaml"));
-            //var scriptsDirectory = EnsureDirectory(workingDirectory, "scripts");
-            //var scripts = await fragmentWriter.WriteAsync(scriptsDirectory, scriptFragments);
-
-            //var sceneFragments = await sceneSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "scenes.yaml"));
-            //var sceneDirectory = EnsureDirectory(workingDirectory, "scenes");
-            //var scenes = await fragmentWriter.WriteAsync(sceneDirectory, sceneFragments);
-
-            //var automationFragments = await automationSplitter.SplitAsync(Path.Combine(workingDirectory.FullName, "automations.yaml"));
-            //var automationsDirectory = EnsureDirectory(workingDirectory, "automations");
-            //var automations = await fragmentWriter.WriteAsync(automationsDirectory, automationFragments);
-
-            //var files = scripts.Concat(scenes).Concat(automations);
         }
     }
 }

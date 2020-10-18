@@ -27,9 +27,13 @@ namespace Hasso.Cli.Split
 
             var content = await Task.Run(() => deserializer.Deserialize<T>(reader));
 
-            return Split(content)
+            var fragments = Split(content)
                 .ToArray()
                 .AsEnumerable();
+
+            logger.Information("found {count} items", fragments.Count());
+
+            return fragments;
         }
         protected abstract IEnumerable<Fragment> Split(T content);
     }
