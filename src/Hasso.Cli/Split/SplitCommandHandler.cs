@@ -49,6 +49,7 @@ namespace Hasso.Cli.Split
                 if (!inputFile.Exists)
                 {
                     logger.Warning($"skipping '{inputFilePath}', as it was not found");
+                    continue;
                 }
 
                 logger.Information($"reading {inputFilePath}");
