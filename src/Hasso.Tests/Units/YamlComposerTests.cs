@@ -1,4 +1,8 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Hasso.Tests.Units
 {
@@ -11,10 +15,28 @@ namespace Hasso.Tests.Units
             this.fixture = fixture;
         }
         [Theory]
-        [InlineData("assets")]
-        public void Composing_Partial_Yamls_Produces_Monolithic_Config(string sourceDirectory)
+        [InlineData("assets", "scripts.yaml")]
+        [InlineData("assets", "scenes.yaml")]
+        [InlineData("assets", "automations.yaml")]
+
+        public async Task Composing_Partial_Yamls_Produces_Monolithic_Config(string directoryName, string fileName)
         {
-            
+            var sourceDirectory = new DirectoryInfo(directoryName);
+            var targetDirectory = new DirectoryInfo("test1");
+
+            if (targetDirectory.Exists)
+                targetDirectory.Delete(true);
+
+            var expected = File.ReadAllText(Path.Combine(directoryName, fileName));
+
+            var compositions = await fixture.SystemUnderTest.ComposeAsync(sourceDirectory, targetDirectory);
+
+            var lookup = compositions.ToDictionary(x => x.Name);
+            lookup.Should().ContainKey(fileName, "this monolithic config should have been generated");
+
+            var actual = File.ReadAllText(lookup[fileName].FullName);
+
+            actual.Should().Be(expected, "the composer should produce the exact match");
         }
 
     }
