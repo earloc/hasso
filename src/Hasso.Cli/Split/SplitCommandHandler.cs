@@ -44,10 +44,16 @@ namespace Hasso.Cli.Split
 
             foreach (var splitter in splitters)
             {
-                var fragments = await splitter.SplitAsync(workingDirectory);
+                var inputFilePath = Path.Combine(workingDirectory.FullName, $"{splitter.SourceName}.yaml");
+                var inputFile = new FileInfo(inputFilePath);
+                if (!inputFile.Exists)
+                {
+                    logger.Warning($"skipping '{inputFilePath}', as it was not found");
+                }
+
+                var fragments = await splitter.SplitAsync(inputFile);
                 if (fragments is null)
                 {
-                    logger.Warning($"skipping '{splitter.SourceName}'");
                     continue;
                 }
                 var directory = EnsureDirectory(workingDirectory, splitter.SourceName);
