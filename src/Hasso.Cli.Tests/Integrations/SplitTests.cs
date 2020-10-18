@@ -40,10 +40,7 @@ namespace Hasso.Cli.Tests.Integrations
             exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
             var subDirectories = Directory.GetDirectories(".");
-            var expectedSubDiretoryCount = 3;
-
-            subDirectories.Should().HaveCount(expectedSubDiretoryCount, "that´s how many configs we placed into the test-env");
-
+            
             subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
 
             var files = Directory.GetFiles(subDirectory);
