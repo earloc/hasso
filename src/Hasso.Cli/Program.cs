@@ -1,15 +1,23 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Serilog;
+using Serilog.Events;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Hasso.Cli.Tests")]
 namespace Hasso.Cli
 {
-    class Program
+    static class Program
     {
 
         static async Task Main(string[] args)
         {
-            var app = new App();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("hasso.log.txt")
+                .WriteTo.ColoredConsole(restrictedToMinimumLevel: LogEventLevel.Information)
+                .CreateLogger();
+
+            var app = new App(Log.Logger);
 
             app.ConfigureCommands();
 

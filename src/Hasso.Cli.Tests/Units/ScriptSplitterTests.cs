@@ -1,9 +1,10 @@
 ﻿using FluentAssertions;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hasso.Cli.Tests.Scripts
+namespace Hasso.Cli.Tests.Units
 {
 
     public class ScriptSplitterTests : IClassFixture<ScriptSplitterTestsFixture>
@@ -21,7 +22,7 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.SystemUnderTest;
 
-            var fragments = await sut.SplitAsync(inputFileName);
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
             var actual = fragments.Count();
 
@@ -36,7 +37,7 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.SystemUnderTest;
 
-            var fragments = await sut.SplitAsync(inputFileName);
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
             var actual = fragments.ToArray()[index].Name;
 
@@ -50,7 +51,7 @@ namespace Hasso.Cli.Tests.Scripts
         {
             var sut = this.fixture.SystemUnderTest;
 
-            var fragments = await sut.SplitAsync(inputFileName);
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
 
             foreach (var fragment in fragments)

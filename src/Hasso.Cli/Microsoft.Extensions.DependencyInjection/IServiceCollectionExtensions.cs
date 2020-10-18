@@ -8,10 +8,16 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddSplitters(this IServiceCollection that)
         {
-            that.AddTransient<IScriptSplitter, YamlScriptSplitter>();
-            that.AddTransient<ISceneSplitter, YamlSceneSplitter>();
-            that.AddTransient<IAutomationSplitter, YamlAutomationSplitter>();
+            that.AddTransient<YamlScriptSplitter, YamlScriptSplitter>();
+            that.AddTransient<YamlSceneSplitter, YamlSceneSplitter>();
+            that.AddTransient<YamlAutomationSplitter, YamlAutomationSplitter>();
 
+            that.AddTransient(provider => new ISplitter[] {
+                provider.GetRequiredService<YamlScriptSplitter>(),
+                provider.GetRequiredService<YamlSceneSplitter>(),
+                provider.GetRequiredService<YamlAutomationSplitter>()
+
+            });
 
             return that;
         }

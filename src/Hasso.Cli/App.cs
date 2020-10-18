@@ -1,5 +1,6 @@
 ﻿using Hasso.Cli.Split;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
 using System.CommandLine;
 using System.CommandLine.DragonFruit;
@@ -11,12 +12,15 @@ namespace Hasso.Cli
     {
 
         private readonly IServiceProvider serviceProvider;
-        private static readonly RootCommand rootCommand = new RootCommand();
+        private static readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
+        private readonly ILogger logger;
 
-
-        public App()
+        public App(ILogger logger)
         {
+            this.logger = logger;
+
             var services = new ServiceCollection();
+            services.AddSingleton(logger);
             ConfigureServices(services);
             serviceProvider = services.BuildServiceProvider();
         }
@@ -53,6 +57,6 @@ namespace Hasso.Cli
         }
 
 
-        internal Task RunAsync(string[] args) => rootCommand.InvokeAsync(args);
+        internal Task<int> RunAsync(string[] args) => rootCommand.InvokeAsync(args);
     }
 }
