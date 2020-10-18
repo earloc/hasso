@@ -1,7 +1,7 @@
 ﻿using Hasso.Cli.Split;
 using Serilog;
 
-namespace Hasso.Cli.Tests.Scripts
+namespace Hasso.Cli.Tests.Units
 {
     public class SceneSplitterTestsFixture
     {

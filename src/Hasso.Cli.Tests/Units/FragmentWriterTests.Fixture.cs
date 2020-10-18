@@ -1,4 +1,4 @@
-﻿namespace Hasso.Cli.Tests
+﻿namespace Hasso.Cli.Tests.Units
 {
     public class FragmentWriterFixture
     {

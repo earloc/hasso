@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hasso.Cli.Tests.Scripts
+namespace Hasso.Cli.Tests.Units
 {
 
     public class SceneSplitterTests : IClassFixture<SceneSplitterTestsFixture>

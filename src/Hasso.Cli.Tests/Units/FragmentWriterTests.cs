@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hasso.Cli.Tests
+namespace Hasso.Cli.Tests.Units
 {
     public class FragmentWriterTests : IClassFixture<FragmentWriterFixture>
     {
