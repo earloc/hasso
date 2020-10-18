@@ -57,6 +57,6 @@ namespace Hasso.Cli
         }
 
 
-        internal Task RunAsync(string[] args) => rootCommand.InvokeAsync(args);
+        internal Task<int> RunAsync(string[] args) => rootCommand.InvokeAsync(args);
     }
 }
