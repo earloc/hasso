@@ -17,7 +17,7 @@ namespace Hasso.Tests.Units
         }
 
         [Theory]
-        [InlineData("automations.yaml", 2)]
+        [InlineData("assets/automations.yaml", 2)]
         public async Task Scripts_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedItemCount)
         {
             var sut = this.fixture.SystemUnderTest;
@@ -31,8 +31,8 @@ namespace Hasso.Tests.Units
         }
 
         [Theory]
-        [InlineData("automations.yaml", 0, "some_automation_name_1")]
-        [InlineData("automations.yaml", 1, "some_automation_name_2")]
+        [InlineData("assets/automations.yaml", 0, "some_automation_name_1")]
+        [InlineData("assets/automations.yaml", 1, "some_automation_name_2")]
         public async Task Scripts_Are_Parsed_With_Their_Correct_Name(string inputFileName, int index, string expectedName)
         {
             var sut = this.fixture.SystemUnderTest;
@@ -46,7 +46,7 @@ namespace Hasso.Tests.Units
         }
 
         [Theory]
-        [InlineData("automations.yaml")]
+        [InlineData("assets/automations.yaml")]
         public async Task ScriptFragmentContent_Only_Contains_Single_Entry(string inputFileName)
         {
             var sut = this.fixture.SystemUnderTest;

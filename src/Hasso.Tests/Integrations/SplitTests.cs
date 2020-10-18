@@ -29,23 +29,35 @@ namespace Hasso.Cli.Tests.Integrations
             }
 
             Directory.CreateDirectory(testRunId);
-            foreach (var file in Directory.GetFiles(".", "*.yaml"))
+
+            foreach (var filePath in Directory.GetFiles("./assets", "*.yaml"))
             {
-                File.Copy(file, Path.Combine(testRunId, file));
+                var file = new FileInfo(filePath);
+                File.Copy(filePath, Path.Combine(testRunId, file.Name));
             }
+
+            var currentDirectory = Directory.GetCurrentDirectory();
+
             Directory.SetCurrentDirectory(testRunId);
 
-            var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split" });
+            try
+            {
+                var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split" });
 
-            exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
+                exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
-            var subDirectories = Directory.GetDirectories(".");
+                var subDirectories = Directory.GetDirectories(".");
 
-            subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
+                subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
 
-            var files = Directory.GetFiles(subDirectory);
+                var files = Directory.GetFiles(subDirectory);
 
-            files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
+                files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(currentDirectory);
+            }
 
         }
     }

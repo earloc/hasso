@@ -1,0 +1,17 @@
+some_automation_name_2:
+  id: 987654321
+  alias: some_automation_name_2
+  description: ''
+  trigger:
+  - type: plugged_in
+    platform: device
+    device_id: 0987654321
+    entity_id: binary_sensor.some_binary_sensor_2
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: 02:00:00
+    before: 03:00:00
+  action:
+  - scene: scene.some_scene_name_2
+  mode: single

@@ -1,11 +1,15 @@
 {
-  "profiles": {
-    "Hasso.Cli": {
-      "commandName": "Project"
-    },
-    "Split": {
-      "commandName": "Project",
-      "commandLineArgs": "fass! --working-directory c:\\temp\\hasso"
+    "profiles": {
+        "Hasso.Cli": {
+            "commandName": "Project"
+        },
+        "Split.Private": {
+            "commandName": "Project",
+            "commandLineArgs": "fass! --working-directory c:\\temp\\hasso\\private"
+        },
+        "Split.Public": {
+            "commandName": "Project",
+            "commandLineArgs": "fass! --working-directory c:\\temp\\hasso\\public"
+        }
     }
-  }
 }

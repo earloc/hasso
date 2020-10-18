@@ -1,0 +1,23 @@
+some_scene_name_2:
+  id: 987654321
+  name: some_scene_name_2
+  entities:
+    light.light_1:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 80
+      color_temp: 454
+      friendly_name: light 1 friendly name
+      supported_features: 35
+      state: on
+    light.light_2:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 80
+      color_temp: 454
+      friendly_name: light 1 friendly name
+      supported_features: 35
+      state: on
+    switch.power_1:
+      friendly_name: power 1 friendly name
+      state: off
