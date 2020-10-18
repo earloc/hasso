@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Cli", "Hasso.Cli\Hasso.Cli.csproj", "{63EDAC6A-56AC-4BDD-89A1-860E268D8401}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Cli.Tests", "Hasso.Cli.Tests\Hasso.Cli.Tests.csproj", "{8F9380F2-7259-4476-962F-0F990BE1AA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Tests", "Hasso.Cli.Tests\Hasso.Tests.csproj", "{8F9380F2-7259-4476-962F-0F990BE1AA5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
