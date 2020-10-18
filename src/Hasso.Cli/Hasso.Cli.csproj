@@ -64,9 +64,5 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Compose\" />
-  </ItemGroup>
 
 </Project>
