@@ -1,11 +1,23 @@
 {
-  "profiles": {
-    "Hasso.Cli": {
-      "commandName": "Project"
-    },
-    "Split": {
-      "commandName": "Project",
-      "commandLineArgs": "fass! --working-directory c:\\temp\\hasso"
+    "profiles": {
+        "Hasso.Cli": {
+            "commandName": "Project"
+        },
+        "Split.Private": {
+            "commandName": "Project",
+            "commandLineArgs": "fass! --source-directory c:\\temp\\hasso\\private"
+        },
+        "Split.Public": {
+            "commandName": "Project",
+            "commandLineArgs": "fass! --source-directory c:\\temp\\hasso\\public"
+        },
+        "Compose.Private": {
+            "commandName": "Project",
+            "commandLineArgs": "platz! --source-directory c:\\temp\\hasso\\private --target-directory c:\\temp\\hasso\\private\\out"
+        },
+        "Compose.Public": {
+            "commandName": "Project",
+            "commandLineArgs": "platz! --source-directory c:\\temp\\hasso\\public --target-directory c:\\temp\\hasso\\public\\out"
+        }
     }
-  }
 }

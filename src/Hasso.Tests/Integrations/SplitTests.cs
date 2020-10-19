@@ -1,52 +1,64 @@
 ﻿using FluentAssertions;
+using Serilog;
 using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Hasso.Cli.Tests.Integrations
 {
-    public class SplitTests : IClassFixture<SplitTestsFixture>
+    public class SplitTests
     {
-        private readonly SplitTestsFixture fixture;
-
-        public SplitTests(SplitTestsFixture fixture)
+        public SplitTests()
         {
-            this.fixture = fixture;
+            SystemUnderTest.ConfigureCommands();
         }
+
+        internal App SystemUnderTest { get; } = new App(Log.Logger);
+
+
+        internal DirectoryInfo ProvideAssets([CallerMemberName] string testName = "")
+        {
+            var testDirectory = new DirectoryInfo(testName);
+
+            if (testDirectory.Exists)
+            {
+                testDirectory.Delete(true);
+            }
+
+            testDirectory.Create();
+
+            foreach (var filePath in Directory.GetFiles("./assets", "*.yaml"))
+            {
+                var file = new FileInfo(filePath);
+                File.Copy(filePath, Path.Combine(testDirectory.FullName, file.Name));
+            }
+
+            return testDirectory;
+        }
+
 
         [Theory]
         [InlineData("scripts", 2)]
         [InlineData("automations", 2)]
         [InlineData("scenes", 2)]
-
+        [Trait("quality", "crap")]
         public async Task SplitCommand_Produces_Expected_Count_Of_Partial_Yamls(string subDirectory, int expectedFileCount)
         {
-            var testRunId = nameof(SplitCommand_Produces_Expected_Count_Of_Partial_Yamls);
+            var workingDirectory = ProvideAssets();
 
-            if (Directory.Exists(testRunId))
-            {
-                Directory.Delete(testRunId, true);
-            }
-
-            Directory.CreateDirectory(testRunId);
-            foreach (var file in Directory.GetFiles(".", "*.yaml"))
-            {
-                File.Copy(file, Path.Combine(testRunId, file));
-            }
-            Directory.SetCurrentDirectory(testRunId);
-
-            var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split" });
+            var exitCode = await SystemUnderTest.RunAsync(new[] { "split", "--source-directory", workingDirectory.FullName });
 
             exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
-            var subDirectories = Directory.GetDirectories(".");
-            
-            subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
+            var subDirectories = workingDirectory.GetDirectories().Select(x => x.Name); ;
 
-            var files = Directory.GetFiles(subDirectory);
+            subDirectories.Should().Contain(subDirectory  , "this should have been created");
+
+            var files = Directory.GetFiles(Path.Combine(workingDirectory.FullName, subDirectory) );
 
             files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
-
         }
     }
 }

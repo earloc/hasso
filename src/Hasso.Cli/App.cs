@@ -1,4 +1,5 @@
-﻿using Hasso.Cli.Split;
+﻿using Hasso.Cli.Compose;
+using Hasso.Cli.Split;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
@@ -12,7 +13,7 @@ namespace Hasso.Cli
     {
 
         private readonly IServiceProvider serviceProvider;
-        private static readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
+        private readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
         private readonly ILogger logger;
 
         public App(ILogger logger)
@@ -29,6 +30,7 @@ namespace Hasso.Cli
         {
             services
                 .AddSplitters()
+                .AddComposer()
                 .AddFragmentWriter()
                 .AddCommandHandlers();
         }
@@ -45,7 +47,7 @@ namespace Hasso.Cli
 
                 command.ConfigureFromMethod(
                     typeof(THandler).GetMethod("ExecuteAsync"),
-                    serviceProvider.GetRequiredService<SplitCommandHandler>()
+                    serviceProvider.GetRequiredService<THandler>()
                 );
 
                 rootCommand.AddCommand(command);
@@ -53,7 +55,11 @@ namespace Hasso.Cli
 
             AddCommand<SplitCommandHandler>("split",
                 "splits monolithic yamls (scenes.yaml, scripts.yaml, ...) into many smaller ones",
-                "fass!", "explode");
+                "fass!", "explode", "-s");
+
+            AddCommand<ComposeCommandHandler>("compose",
+                "composes multiple partial-yamls into monolithic ones, ready to deploy",
+                "platz!", "implode", "-c");
         }
 
 

@@ -3,7 +3,7 @@ using Serilog.Events;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("Hasso.Cli.Tests")]
+[assembly: InternalsVisibleTo("Hasso.Tests")]
 namespace Hasso.Cli
 {
     static class Program

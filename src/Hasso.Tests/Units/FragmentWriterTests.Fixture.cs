@@ -1,6 +1,7 @@
-﻿using Serilog;
+﻿using Hasso.Cli;
+using Serilog;
 
-namespace Hasso.Cli.Tests.Units
+namespace Hasso.Tests.Units
 {
     public class FragmentWriterFixture
     {
