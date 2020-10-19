@@ -45,7 +45,7 @@ namespace Hasso.Cli.Compose
                     builder.Append(content);
                 }
 
-                var targetFile = Path.Combine(targetDirectory.FullName, $"{directory}.yaml");
+                var targetFile = Path.Combine(targetDirectory.FullName, $"{directory.Name}.yaml");
 
                 File.WriteAllText(targetFile, builder.ToString());
                 logger.Information("written {targetFile}", targetFile);
