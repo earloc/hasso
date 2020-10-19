@@ -54,11 +54,11 @@ namespace Hasso.Cli
 
             AddCommand<SplitCommandHandler>("split",
                 "splits monolithic yamls (scenes.yaml, scripts.yaml, ...) into many smaller ones",
-                "fass!", "explode");
+                "fass!", "explode", "-s");
 
             AddCommand<ComposeCommandHandler>("compose",
                 "composes multiple partial-yamls into monolithic ones, ready to deploy to HA",
-                "platz!", "implode");
+                "platz!", "implode", "-c");
         }
 
 
