@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Hasso.Cli.Tests.Integrations
 {
-    public class SplitTests : IClassFixture<SplitTestsFixture>
+    public class SplitTests : IClassFixture<AppFixture>
     {
-        private readonly SplitTestsFixture fixture;
+        private readonly AppFixture fixture;
 
-        public SplitTests(SplitTestsFixture fixture)
+        public SplitTests(AppFixture fixture)
         {
             this.fixture = fixture;
         }

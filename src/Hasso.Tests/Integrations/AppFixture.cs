@@ -2,10 +2,10 @@
 
 namespace Hasso.Cli.Tests.Integrations
 {
-    public class SplitTestsFixture
+    public class AppFixture
     {
 
-        public SplitTestsFixture()
+        public AppFixture()
         {
             SystemUnderTest.ConfigureCommands();
         }
