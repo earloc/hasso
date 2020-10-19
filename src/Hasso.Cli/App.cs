@@ -13,7 +13,7 @@ namespace Hasso.Cli
     {
 
         private readonly IServiceProvider serviceProvider;
-        private static readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
+        private readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
         private readonly ILogger logger;
 
         public App(ILogger logger)

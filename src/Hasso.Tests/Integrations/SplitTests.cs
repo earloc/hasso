@@ -1,19 +1,43 @@
 ﻿using FluentAssertions;
+using Serilog;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Hasso.Cli.Tests.Integrations
 {
-    public class SplitTests : IClassFixture<AppFixture>
+    public class SplitTests
     {
-        private readonly AppFixture fixture;
-
-        public SplitTests(AppFixture fixture)
+        public SplitTests()
         {
-            this.fixture = fixture;
+            SystemUnderTest.ConfigureCommands();
         }
+
+        internal App SystemUnderTest { get; } = new App(Log.Logger);
+
+
+        internal DirectoryInfo ProvideAssets([CallerMemberName] string testName = "")
+        {
+            var testDirectory = new DirectoryInfo(testName);
+
+            if (testDirectory.Exists)
+            {
+                testDirectory.Delete(true);
+            }
+
+            testDirectory.Create();
+
+            foreach (var filePath in Directory.GetFiles("./assets", "*.yaml"))
+            {
+                var file = new FileInfo(filePath);
+                File.Copy(filePath, Path.Combine(testDirectory.FullName, file.Name));
+            }
+
+            return testDirectory;
+        }
+
 
         [Theory]
         [InlineData("scripts", 2)]
@@ -22,9 +46,9 @@ namespace Hasso.Cli.Tests.Integrations
         [Trait("quality", "crap")]
         public async Task SplitCommand_Produces_Expected_Count_Of_Partial_Yamls(string subDirectory, int expectedFileCount)
         {
-            var workingDirectory = fixture.ProvideAssetsForSplit();
+            var workingDirectory = ProvideAssets();
 
-            var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split", "--source-directory", workingDirectory.FullName });
+            var exitCode = await SystemUnderTest.RunAsync(new[] { "split", "--source-directory", workingDirectory.FullName });
 
             exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 

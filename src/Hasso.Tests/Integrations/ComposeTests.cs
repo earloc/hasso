@@ -1,19 +1,46 @@
 ﻿using FluentAssertions;
+using Serilog;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Hasso.Cli.Tests.Integrations
 {
-    public class ComposeTests : IClassFixture<AppFixture>
+    public class ComposeTests
     {
-        private readonly AppFixture fixture;
-
-        public ComposeTests(AppFixture fixture)
+        internal DirectoryInfo ProvideAssets([CallerMemberName] string testName = "")
         {
-            this.fixture = fixture;
+            var testDirectory = new DirectoryInfo(testName);
+
+            if (testDirectory.Exists)
+            {
+                testDirectory.Delete(true);
+            }
+
+            testDirectory.Create();
+
+            var sourceDirectory = new DirectoryInfo("assets");
+            foreach (var directory in sourceDirectory.GetDirectories())
+            {
+                var targetDirectory = testDirectory.CreateSubdirectory(directory.Name);
+                foreach (var file in directory.GetFiles())
+                {
+                    File.Copy(file.FullName, Path.Combine(targetDirectory.FullName, file.Name));
+                }
+            }
+
+            return testDirectory;
         }
+
+        public ComposeTests()
+        {
+            SystemUnderTest.ConfigureCommands();
+        }
+
+        internal App SystemUnderTest { get; } = new App(Log.Logger);
+
 
         [Theory]
         [InlineData("scripts")]
@@ -22,9 +49,9 @@ namespace Hasso.Cli.Tests.Integrations
         [Trait("quality", "crap")]
         public async Task ComposeCommand_Produces_Expected_Content_Of_Monolithic_Configs(string subDirectory)
         {
-            var workingDirectory = fixture.ProvideAssetsForCompose();
+            var workingDirectory = ProvideAssets();
 
-            var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "compose", "--source-directory", workingDirectory.FullName });
+            var exitCode = await SystemUnderTest.RunAsync(new[] { "compose", "--source-directory", workingDirectory.FullName });
 
             exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
