@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,47 +19,35 @@ namespace Hasso.Cli.Tests.Integrations
         [InlineData("scripts", 2)]
         [InlineData("automations", 2)]
         [InlineData("scenes", 2)]
-
+        [Trait("quality", "crap")]
         public async Task SplitCommand_Produces_Expected_Count_Of_Partial_Yamls(string subDirectory, int expectedFileCount)
         {
-            var testRunId = nameof(SplitCommand_Produces_Expected_Count_Of_Partial_Yamls);
+            var workingDirectory = new DirectoryInfo(nameof(SplitCommand_Produces_Expected_Count_Of_Partial_Yamls));
 
-            if (Directory.Exists(testRunId))
+            if (workingDirectory.Exists)
             {
-                Directory.Delete(testRunId, true);
+                workingDirectory.Delete(true);
             }
 
-            Directory.CreateDirectory(testRunId);
+            workingDirectory.Create();
 
             foreach (var filePath in Directory.GetFiles("./assets", "*.yaml"))
             {
                 var file = new FileInfo(filePath);
-                File.Copy(filePath, Path.Combine(testRunId, file.Name));
+                File.Copy(filePath, Path.Combine(workingDirectory.FullName, file.Name));
             }
 
-            var currentDirectory = Directory.GetCurrentDirectory();
+            var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split", "--source-directory", workingDirectory.FullName });
 
-            Directory.SetCurrentDirectory(testRunId);
+            exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
 
-            try
-            {
-                var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split" });
+            var subDirectories = workingDirectory.GetDirectories().Select(x => x.Name); ;
 
-                exitCode.Should().Be(0, "that indicates a healthy execution, which we expect here");
+            subDirectories.Should().Contain(subDirectory  , "this should have been created");
 
-                var subDirectories = Directory.GetDirectories(".");
+            var files = Directory.GetFiles(Path.Combine(workingDirectory.FullName, subDirectory) );
 
-                subDirectories.Should().Contain(Path.Combine(".", subDirectory).ToString(), "this should have been created");
-
-                var files = Directory.GetFiles(subDirectory);
-
-                files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
-            }
-            finally
-            {
-                Directory.SetCurrentDirectory(currentDirectory);
-            }
-
+            files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
         }
     }
 }
