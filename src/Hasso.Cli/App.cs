@@ -57,7 +57,7 @@ namespace Hasso.Cli
                 "fass!", "explode", "-s");
 
             AddCommand<ComposeCommandHandler>("compose",
-                "composes multiple partial-yamls into monolithic ones, ready to deploy to HA",
+                "composes multiple partial-yamls into monolithic ones, ready to deploy",
                 "platz!", "implode", "-c");
         }
 
