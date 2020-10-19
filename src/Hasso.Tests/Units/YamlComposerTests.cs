@@ -22,7 +22,7 @@ namespace Hasso.Tests.Units
         public async Task Composing_Partial_Yamls_Produces_Monolithic_Config(string directoryName, string fileName)
         {
             var sourceDirectory = new DirectoryInfo(directoryName);
-            var targetDirectory = new DirectoryInfo("test1");
+            var targetDirectory = new DirectoryInfo(nameof(Composing_Partial_Yamls_Produces_Monolithic_Config));
 
             if (targetDirectory.Exists)
                 targetDirectory.Delete(true);

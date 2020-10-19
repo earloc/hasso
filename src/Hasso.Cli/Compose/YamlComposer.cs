@@ -42,12 +42,12 @@ namespace Hasso.Cli.Compose
 
                     logger.Information("collected {FullName}", file.FullName);
 
-                    builder.Append(content);
+                    builder.AppendLine(content);
                 }
 
                 var targetFile = Path.Combine(targetDirectory.FullName, $"{directory.Name}.yaml");
 
-                File.WriteAllText(targetFile, builder.ToString());
+                File.WriteAllText(targetFile, builder.ToString().Trim());
                 logger.Information("written {targetFile}", targetFile);
 
                 resultFiles.Add(new FileInfo(targetFile));
