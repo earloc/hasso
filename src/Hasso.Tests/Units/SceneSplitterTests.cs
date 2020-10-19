@@ -61,7 +61,21 @@ namespace Hasso.Tests.Units
                     .Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
+        }
 
+        [Theory]
+        [InlineData("assets/scenes.yaml")]
+        public async Task SceneFragmentContent_Is_Serialized_As_List_Element(string inputFileName)
+        {
+            var sut = this.fixture.SystemUnderTest;
+
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
+
+            foreach (var fragment in fragments)
+            {
+                var actual = fragment.Content.First().Key.ToString();
+                actual.Should().StartWith("- id:", "this is how list-style elements are represented in yaml");
+            }
         }
     }
 }
