@@ -1,5 +1,4 @@
-some_automation_name_2:
-  id: 987654321
+- id: '987654321'
   alias: some_automation_name_2
   description: ''
   trigger:
@@ -10,7 +9,7 @@ some_automation_name_2:
     domain: binary_sensor
   condition:
   - condition: time
-    after: 02:00:00
+    after: '02:00:00'
     before: 03:00:00
   action:
   - scene: scene.some_scene_name_2
