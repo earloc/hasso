@@ -27,7 +27,9 @@ namespace Hasso.Tests.Units
             if (targetDirectory.Exists)
                 targetDirectory.Delete(true);
 
-            var expected = File.ReadAllText(Path.Combine(directoryName, fileName));
+            targetDirectory.Create();
+
+            var expected = File.ReadAllText(Path.Combine(sourceDirectory.FullName, fileName));
 
             var compositions = await fixture.SystemUnderTest.ComposeAsync(sourceDirectory, targetDirectory);
 
