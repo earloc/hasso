@@ -22,7 +22,7 @@ namespace Hasso.Cli.Tests.Integrations
         [Trait("quality", "crap")]
         public async Task ComposeCommand_Produces_Expected_Content_Of_Monolithic_Configs(string subDirectory)
         {
-            var workingDirectory = fixture.ProvideAssetsForTest();
+            var workingDirectory = fixture.ProvideAssetsForCompose();
 
             var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "compose", "--source-directory", workingDirectory.FullName });
 

@@ -30,6 +30,7 @@ namespace Hasso.Cli
         {
             services
                 .AddSplitters()
+                .AddComposer()
                 .AddFragmentWriter()
                 .AddCommandHandlers();
         }
@@ -46,7 +47,7 @@ namespace Hasso.Cli
 
                 command.ConfigureFromMethod(
                     typeof(THandler).GetMethod("ExecuteAsync"),
-                    serviceProvider.GetRequiredService<SplitCommandHandler>()
+                    serviceProvider.GetRequiredService<THandler>()
                 );
 
                 rootCommand.AddCommand(command);

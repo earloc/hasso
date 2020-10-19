@@ -22,7 +22,7 @@ namespace Hasso.Cli.Tests.Integrations
         [Trait("quality", "crap")]
         public async Task SplitCommand_Produces_Expected_Count_Of_Partial_Yamls(string subDirectory, int expectedFileCount)
         {
-            var workingDirectory = fixture.ProvideAssetsForTest();
+            var workingDirectory = fixture.ProvideAssetsForSplit();
 
             var exitCode = await fixture.SystemUnderTest.RunAsync(new[] { "split", "--source-directory", workingDirectory.FullName });
 

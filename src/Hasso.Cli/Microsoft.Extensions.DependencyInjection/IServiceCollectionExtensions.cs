@@ -29,6 +29,13 @@ namespace Microsoft.Extensions.DependencyInjection
             return that;
         }
 
+        public static IServiceCollection AddComposer(this IServiceCollection that)
+        {
+            that.AddTransient<IComposer, YamlComposer>();
+
+            return that;
+        }
+
         public static IServiceCollection AddCommandHandlers(this IServiceCollection that)
         {
             that.AddTransient<SplitCommandHandler, SplitCommandHandler>();

@@ -32,6 +32,11 @@ namespace Hasso.Cli.Compose
 
             foreach (var directory in supportedDirectories)
             {
+                if (!directory.Exists) 
+                {
+                    logger.Warning("Directory {directory} not found, skipping", directory.FullName);
+                    continue;
+                }
                 logger.Information("scanning '{directory}'", directory.FullName);
                 var files = directory.GetFiles("*.partial.yaml");
                 var builder = new StringBuilder();
