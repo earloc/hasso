@@ -41,7 +41,7 @@ namespace Hasso.Cli.Compose
                 var files = directory.GetFiles("*.partial.yaml");
                 var builder = new StringBuilder();
 
-                foreach (var file in files)
+                foreach (var file in files.OrderBy(x => x.FullName))
                 {
                     var content = File.ReadAllText(file.FullName);
 
