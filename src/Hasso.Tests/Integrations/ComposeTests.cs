@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Serilog;
+using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace Hasso.Cli.Tests.Integrations
 
             var fileName = $"{subDirectory}.yaml";
 
-            var expected = File.ReadAllText(Path.Combine("assets", fileName));
-            var actual = File.ReadAllText(Path.Combine(workingDirectory.FullName, fileName));
+            var expected = File.ReadAllText(Path.Combine("assets", fileName)).Replace(Environment.NewLine, "").Replace(" ", "");
+            var actual = File.ReadAllText(Path.Combine(workingDirectory.FullName, fileName)).Replace(Environment.NewLine, "").Replace(" ", "");
 
             actual.Should().Be(expected, "this is the expected product of the compose-command");
 
