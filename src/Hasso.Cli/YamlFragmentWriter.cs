@@ -25,8 +25,8 @@ namespace Hasso.Cli
             {
                 var targetFileName = Path.Combine(baseDirectory.FullName, $"{_.Name}.partial.yaml");
                 var targetFile = new FileInfo(targetFileName);
-                using var writer = File.CreateText(targetFile.FullName);
-                serializer.Serialize(writer, _.Content);
+                var content = serializer.Serialize(_.Content);
+                File.WriteAllText(targetFile.FullName, content.Trim());
 
                 logger.Information("created '{targetFileName}'", targetFileName);
 
