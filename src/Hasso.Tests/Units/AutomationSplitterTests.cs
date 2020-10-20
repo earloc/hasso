@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.Content;
-                actual.Count
+                var actual = (IList<object>)fragment.Content;
+                actual?.Count
                     .Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
@@ -73,7 +74,7 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.Content.First().Key.ToString();
+                var actual = fragment.ToString();
                 actual.Should().StartWith("- id:", "this is how list-style elements are represented in yaml");
             }
         }
