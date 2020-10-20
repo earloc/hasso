@@ -29,13 +29,14 @@
   
   <!--versioning-->
   <PropertyGroup>
-    <Version>0.3.1</Version>
-    <AssemblyVersion>0.3.1.0</AssemblyVersion>
-    <FileVersion>0.3.1.0</FileVersion>
+    <Version>0.3.2</Version>
+    <AssemblyVersion>0.3.2.0</AssemblyVersion>
+    <FileVersion>0.3.2.0</FileVersion>
     <Copyright>earloc</Copyright>
     <PackageReleaseNotes>
+      0.3.2 - avoid extra blank-lines in generated files after split
       0.3.1 - fixes bug where list-style config-yaml´s were not splitted correctly
-      0.3.1 - add "compose"-verb for bundling up *.partial.yaml´s into their monolithic counter-parts
+      0.3.0 - add "compose"-verb for bundling up *.partial.yaml´s into their monolithic counter-parts
       0.2.1 - added logging
       0.2.0 - move to verb-style cli
       0.1.1 - automated nuget-pushes
