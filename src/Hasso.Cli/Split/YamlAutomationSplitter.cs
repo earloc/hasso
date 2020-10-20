@@ -22,7 +22,7 @@ namespace Hasso.Cli.Split
                 return new Fragment
                 {
                     Name = name,
-                    Content = new Dictionary<object, object> { { name, item } }
+                    Content = new List<object> { item }
                 };
             });
 

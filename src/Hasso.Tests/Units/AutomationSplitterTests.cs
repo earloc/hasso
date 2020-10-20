@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Hasso.Tests.Units
 
         [Theory]
         [InlineData("assets/automations.yaml", 2)]
-        public async Task Scripts_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedItemCount)
+        public async Task Automations_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedItemCount)
         {
             var sut = this.fixture.SystemUnderTest;
 
@@ -33,7 +34,7 @@ namespace Hasso.Tests.Units
         [Theory]
         [InlineData("assets/automations.yaml", 0, "some_automation_name_1")]
         [InlineData("assets/automations.yaml", 1, "some_automation_name_2")]
-        public async Task Scripts_Are_Parsed_With_Their_Correct_Name(string inputFileName, int index, string expectedName)
+        public async Task Automations_Are_Parsed_With_Their_Correct_Name(string inputFileName, int index, string expectedName)
         {
             var sut = this.fixture.SystemUnderTest;
 
@@ -47,7 +48,7 @@ namespace Hasso.Tests.Units
 
         [Theory]
         [InlineData("assets/automations.yaml")]
-        public async Task ScriptFragmentContent_Only_Contains_Single_Entry(string inputFileName)
+        public async Task AutomationsFragmentContent_Only_Contains_Single_Entry(string inputFileName)
         {
             var sut = this.fixture.SystemUnderTest;
 
@@ -56,12 +57,26 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.Content;
-                actual.Count
+                var actual = (IList<object>)fragment.Content;
+                actual?.Count
                     .Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
+        }
 
+        [Theory]
+        [InlineData("assets/automations.yaml")]
+        public async Task AutomationsFragmentContent_Is_Serialized_As_List_Element(string inputFileName)
+        {
+            var sut = this.fixture.SystemUnderTest;
+
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
+
+            foreach (var fragment in fragments)
+            {
+                var actual = fragment.ToString();
+                actual.Should().StartWith("- id:", "this is how list-style elements are represented in yaml");
+            }
         }
     }
 }
