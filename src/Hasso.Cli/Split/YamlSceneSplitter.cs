@@ -1,11 +1,12 @@
-﻿using Serilog;
-using System;
+﻿using Hasso.Models;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlSceneSplitter : YamlSplitterBase<List<object>>
+
+    internal class YamlSceneSplitter : YamlSplitterBase<List<Scene>>
     {
         public YamlSceneSplitter(ILogger logger) : base(logger)
         {
@@ -13,31 +14,19 @@ namespace Hasso.Cli.Split
 
         public override string SourceName => "scenes";
 
-        protected override IEnumerable<Fragment> Split(List<object> content)
+        protected override IEnumerable<Fragment> Split(List<Scene> content)
         {
             var fragments = content.Select(item =>
             {
-                var name = ResolveNameOf(item);
                 return new Fragment
                 {
-                    Name = name,
+                    Name = item.Name,
                     Content = new List<object> { item }
                 };
 
             });
 
             return fragments;
-        }
-
-        private string ResolveNameOf(object key)
-        {
-            var content = key as Dictionary<object, object>;
-
-            var name = content?["name"] as string;
-
-            if (name is null) throw new InvalidOperationException("expected 'name'-element was not found");
-
-            return name;
         }
     }
 }

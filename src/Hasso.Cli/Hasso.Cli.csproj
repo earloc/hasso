@@ -42,6 +42,7 @@
       0.1.1 - automated nuget-pushes
       0.1.0 - Initial release (splittin automations.yaml, scenes.yaml, scripts.yaml)
     </PackageReleaseNotes>
+    <RootNamespace>Hasso</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
@@ -65,6 +66,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Verbs\" />
   </ItemGroup>
 
 </Project>

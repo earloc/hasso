@@ -19,13 +19,16 @@ namespace Hasso.Cli
         {
             if (!baseDirectory.Exists) baseDirectory.Create();
 
-            var serializer = new SerializerBuilder().Build();
+            var serializer = new SerializerBuilder()
+                .Build();
 
             var tasks = fragments.Select(_ =>
             {
                 var targetFileName = Path.Combine(baseDirectory.FullName, $"{_.Name}.partial.yaml");
                 var targetFile = new FileInfo(targetFileName);
+
                 var content = serializer.Serialize(_.Content);
+
                 File.WriteAllText(targetFile.FullName, content.Trim());
 
                 logger.Information("created '{targetFileName}'", targetFileName);

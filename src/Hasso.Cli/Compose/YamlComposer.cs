@@ -32,7 +32,7 @@ namespace Hasso.Cli.Compose
 
             foreach (var directory in supportedDirectories)
             {
-                if (!directory.Exists) 
+                if (!directory.Exists)
                 {
                     logger.Warning("Directory {directory} not found, skipping", directory.FullName);
                     continue;
