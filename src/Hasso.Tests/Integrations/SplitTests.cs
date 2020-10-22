@@ -54,9 +54,9 @@ namespace Hasso.Cli.Tests.Integrations
 
             var subDirectories = workingDirectory.GetDirectories().Select(x => x.Name); ;
 
-            subDirectories.Should().Contain(subDirectory  , "this should have been created");
+            subDirectories.Should().Contain(subDirectory, "this should have been created");
 
-            var files = Directory.GetFiles(Path.Combine(workingDirectory.FullName, subDirectory) );
+            var files = Directory.GetFiles(Path.Combine(workingDirectory.FullName, subDirectory));
 
             files.Should().HaveCount(expectedFileCount, "that´s the number of entries that should have been splitted");
         }

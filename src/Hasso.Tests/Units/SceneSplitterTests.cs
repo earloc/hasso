@@ -75,7 +75,7 @@ namespace Hasso.Tests.Units
             foreach (var fragment in fragments)
             {
                 var actual = fragment.ToString();
-                actual.Should().StartWith("- id:", "this is how list-style elements are represented in yaml");
+                actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
         }
     }
