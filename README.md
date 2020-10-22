@@ -10,12 +10,13 @@ The **h**ome-**ass**istant-**o**rganizer, or hasso, is a small cli helping out d
 Hasso can split up home-assistant's configuration-yamls in many smaller ones, which then can be edited and organized more easily and later packed up again into monolithic versions home-assistant comes with OOTB.
 
 > If you already utilize [splitted configurations], this tool might be of no use for you
+>
 > If not, read on ;)
 
 # How to get it?
 
 ## dotnet global tool
-Run the follwoing command to download [hasso] as a global dotnet-tool [from nuget.org]
+Run the follwoing command to download hasso as a global dotnet-tool [from nuget.org]
 
 ```
 dotnet tool install --global hasso
@@ -23,8 +24,8 @@ dotnet tool install --global hasso
 
 # Verbs / commands
 
-Hasso uses a verb-style CLI, similar to git or other popular cli's out there.
-To show some help about the possible verbs and it's parameters, just ommit any parameters.
+Hasso uses a verb-style cli, similar to git or other popular cli's out there.
+To show some help about the possible verbs and it's parameters, just ommit any parameters:
 
 ```
 Usage:
@@ -102,7 +103,7 @@ and pack them up to their respective counterparts:
 - ```scripts.yaml```
 - ```automations.yaml```
 
-which then can be deployed easily back onto your HA-instance.
+which then can be deployed back onto your HA-instance, easily.
 
 > remember to reload the affected configurations in HA´s UI afterwards, to see the changes take effect.
 
@@ -113,7 +114,7 @@ which then can be deployed easily back onto your HA-instance.
 I recently started tackling around with home-automation, where I found myself doing a lot of repetitive tasks involving
 1. making edits in home-assistant's ```UI``` 
     > e.g. create scripts, automations, etc. to get accustomed with the way home-assistant is organized
-2. manually copy home-assistant's configuration yamls from my PI onto my local machine
+2. manually copy home-assistant's configuration yamls from home-assistant-instance onto my local machine
 3. commit the current version(s) into a git repo
     > to easy roll back when I happen to f**k things up in the next step
 3. make some manuall edits / tweaks, etc.
@@ -124,11 +125,11 @@ I recently started tackling around with home-automation, where I found myself do
 
 Which - for myself - I refer to as the ```pull/modify/push```-loop.
 
-As I started to automate more and more within my home, I quickly got bored a bit about the above steps involved in this process and strived for a faster *inner-loop*, especially regarding **step 2.** from above.
+As I started to automate more and more within my home, I quickly got bored a bit about the steps involved in this process and strived for a faster *inner-loop*, especially regarding **step 2.** from above.
 
 Manually messsing around in the quickly growing yaml-files hurts (me), even with [this little gem here].
 
-> I'm aware of the [splitted configurations]-feature home-assistant offers kind of OOTB - however, I'm still not there yet - so bare with me if this tool here does not make any sense. For me, it makes a huge difference, at least atm.
+> I'm aware of the [splitted configurations]-feature home-assistant offers kind of OOTB - however, I'm still not there yet - so bare with me if this tool here does not make any sense. For the time beeing, it makes a huge difference in my current loop.
 
 # Contributing
 - file an issue
@@ -138,8 +139,7 @@ Manually messsing around in the quickly growing yaml-files hurts (me), even with
 - hope for the best ;)
   
 
-[from nuget.org]:(https://www.nuget.org/packages/Hasso/)
-[home-assistant]:(https://www.home-assistant.io/)
-[advanced scenarios offered by home-assistant itself]:(https://www.home-assistant.io/docs/configuration/splitting_configuration/)
-[splitted configurations]:(https://www.home-assistant.io/docs/configuration/splitting_configuration/)
-[this little gem here]:(https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant)
+[from nuget.org]:https://www.nuget.org/packages/Hasso/
+[home-assistant]:https://www.home-assistant.io/
+[splitted configurations]:https://www.home-assistant.io/docs/configuration/splitting_configuration/
+[this little gem here]:https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant
