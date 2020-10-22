@@ -13,11 +13,11 @@
         },
         "Compose.Private": {
             "commandName": "Project",
-            "commandLineArgs": "platz! --source-directory c:\\temp\\hasso\\private --target-directory c:\\temp\\hasso\\private\\out"
+            "commandLineArgs": "aus! --source-directory c:\\temp\\hasso\\private --target-directory c:\\temp\\hasso\\private\\out"
         },
         "Compose.Public": {
             "commandName": "Project",
-            "commandLineArgs": "platz! --source-directory c:\\temp\\hasso\\public --target-directory c:\\temp\\hasso\\public\\out"
+            "commandLineArgs": "aus! --source-directory c:\\temp\\hasso\\public --target-directory c:\\temp\\hasso\\public\\out"
         }
     }
 }
