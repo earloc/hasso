@@ -4,34 +4,115 @@ HomeAssistant-Organizer
 
 ![.NET Core](https://github.com/earloc/hasso/workflows/.NET%20Core/badge.svg) ![NuGet](https://img.shields.io/nuget/v/hasso)
 
-## What is it?
+# What is it?
 
-The Home-ASSistant-Organizer, or short hasso, is a small cli helping out doing some tideous work when manually modifying home-assistant's configuration-yamls.
+The **h**ome-**ass**istant-**o**rganizer, or hasso, is a small cli helping out doing some tedious work when manually modifying home-assistant's configuration-yamls.
 Hasso can split up home-assistant's configuration-yamls in many smaller ones, which then can be edited and organized more easily and later packed up again into monolithic versions home-assistant comes with OOTB.
 
 > If you already utilize [splitted configurations] home-assistant also offers, this tool might be of no use for you
 > If not, read on ;)
 
-## How to get it?
+# How to get it?
 
-### dotnet global tool
-Run the follwoing command to download [hasso] as a global dotnet-tool
+## dotnet global tool
+Run the follwoing command to download [hasso] as a global dotnet-tool [from nuget.org]
 
 ```
 dotnet tool install --global hasso
 ```
 
-### Verbs
+# Verbs / commands
 
-hasso uses a verb-style CLI, similar to git or other popular cli's out there.
-To show some help about the possible verbs and it's parameters, just ommit any parameters
+Hasso uses a verb-style CLI, similar to git or other popular cli's out there.
+To show some help about the possible verbs and it's parameters, just ommit any parameters.
 
-#### split
+```
+Usage:
+  hasso [options] [command]
+
+Options:
+  --version         Show version information
+  -?, -h, --help    Show help and usage information
+
+Commands:
+  explode, fass!, split, -s       splits monolithic yamls (scenes.yaml, scripts.yaml, ...) into many smaller ones
+  compose, implode, platz!, -c    composes multiple partial-yamls into monolithic ones, ready to deploy
+```
+
+## Split
+
+Invoking ``` dotnet hasso split ```
+
+> german folks may also try ```dotnet hasso fass!``` ;)
+
+will look in the current working directory and search for 
+- ```scenes.yaml```
+- ```scripts.yaml```
+- ```automations.yaml```
+
+Hasso then parses it´s contents and split them up at root level - generating ```*.partial.yamls``` into the respective sub-directories:
+- ```scenes```
+- ```scripts```
+- ```automations```
+
+### Example
+Given the following 
+- ```scripts.yaml```:
+  ```yaml
+  some_script_name_1:
+    alias: Some.Script.Name 1
+    sequence:
+    - type: turn_on
+      ...
+    mode: restart
+  some_script_name_2:
+    alias: Some.Script.Name 2
+    ...
+    mode: restart
+  ```
+```dotnet hasso split``` will generate the following files:
+
+- ```./scripts/Some.Script.Name 1.partial.yaml```
+  ```yaml
+  some_script_name_1:
+    alias: Some.Script.Name 1
+    sequence:
+    - type: turn_on
+      ...
+    mode: restart
+  ```
+- ```./scripts/Some.Script.Name 2.partial.yaml```
+  ```yaml
+  some_script_name_2:
+    alias: Some.Script.Name 2
+    ...
+    mode: restart
+  ```
+
+Same applies to above mention other supported files.
 
 
-#### compose
+## Compose
 
-## But...why?
+Invoking ``` dotnet hasso compose ```
+
+> german folks may also try ```dotnet hasso aus!``` ;)
+
+will gather all ```*.partial.yaml```-files underneath the following sub-directories of the current working directory:
+- ```scenes```
+- ```scripts```
+- ```automations```
+
+and pack them up to their respective counterparts:
+- ```scenes.yaml```
+- ```scripts.yaml```
+- ```automations.yaml```
+
+which then can be deployed easily back onto your HA-instance.
+
+> remember to reload the affected configurations in HA´s UI afterwards, to see the changes take effect.
+
+# But...why?
 
 I recently started tackling around with home-automation, where I found myself doing a lot of repetitive tasks involving
 1. making edits in home-assistant's ```UI``` 
@@ -53,8 +134,7 @@ Manually messsing around in the quickly growing yaml-files hurts (me), even with
 
 > I'm aware of the [splitted configurations]-feature home-assistant offers kind of OOTB - however, I'm still not there yet - so bare with me if this tool here does not make any sense. For me, it makes a huge difference, at least atm.
 
-
-## Contributions welcome:
+# Contributing
 - file an issue
 - fork the repository
 - make the changes
@@ -62,7 +142,7 @@ Manually messsing around in the quickly growing yaml-files hurts (me), even with
 - hope for the best ;)
   
 
-[PI]:()
+[from nuget.org]:(https://www.nuget.org/packages/Hasso/)
 [home-assistant]:(https://www.home-assistant.io/)
 [advanced scenarios offered by home-assistant itself]:(https://www.home-assistant.io/docs/configuration/splitting_configuration/)
 [splitted configurations]:(https://www.home-assistant.io/docs/configuration/splitting_configuration/)
