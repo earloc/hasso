@@ -9,7 +9,7 @@ HomeAssistant-Organizer
 The **h**ome-**ass**istant-**o**rganizer, or hasso, is a small cli helping out doing some tedious work when manually modifying home-assistant's configuration-yamls.
 Hasso can split up home-assistant's configuration-yamls in many smaller ones, which then can be edited and organized more easily and later packed up again into monolithic versions home-assistant comes with OOTB.
 
-> If you already utilize [splitted configurations] home-assistant also offers, this tool might be of no use for you
+> If you already utilize [splitted configurations], this tool might be of no use for you
 > If not, read on ;)
 
 # How to get it?
