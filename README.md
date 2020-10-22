@@ -36,16 +36,12 @@ Options:
 
 Commands:
   explode, fass!, split, -s       splits monolithic yamls (scenes.yaml, scripts.yaml, ...) into many smaller ones
-  compose, implode, platz!, -c    composes multiple partial-yamls into monolithic ones, ready to deploy
+  aus!, compose, implode, -c    composes multiple partial-yamls into monolithic ones, ready to deploy
 ```
 
 ## Split
 
-Invoking ``` dotnet hasso split ```
-
-> german folks may also try ```dotnet hasso fass!``` ;)
-
-will look in the current working directory and search for 
+Invoking ``` dotnet hasso split ``` will look in the current working directory and search for 
 - ```scenes.yaml```
 - ```scripts.yaml```
 - ```automations.yaml```
@@ -54,6 +50,8 @@ Hasso then parses it´s contents and split them up at root level - generating ``
 - ```scenes```
 - ```scripts```
 - ```automations```
+
+> german folks may also try ```dotnet hasso fass!``` ;)
 
 ### Example
 Given the following 
@@ -89,16 +87,12 @@ Given the following
     mode: restart
   ```
 
-Same applies to above mention other supported files.
+Same applies to previous mentioned config-files.
 
 
 ## Compose
 
-Invoking ``` dotnet hasso compose ```
-
-> german folks may also try ```dotnet hasso aus!``` ;)
-
-will gather all ```*.partial.yaml```-files underneath the following sub-directories of the current working directory:
+Invoking ``` dotnet hasso compose ``` will gather all ```*.partial.yaml```-files underneath the following sub-directories of the current working directory:
 - ```scenes```
 - ```scripts```
 - ```automations```
@@ -111,6 +105,8 @@ and pack them up to their respective counterparts:
 which then can be deployed easily back onto your HA-instance.
 
 > remember to reload the affected configurations in HA´s UI afterwards, to see the changes take effect.
+
+> german folks may also try ```dotnet hasso aus!``` ;)
 
 # But...why?
 
