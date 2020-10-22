@@ -59,7 +59,7 @@ namespace Hasso.Cli
 
             AddCommand<ComposeCommandHandler>("compose",
                 "composes multiple partial-yamls into monolithic ones, ready to deploy",
-                "platz!", "implode", "-c");
+                "aus!", "implode", "-c");
         }
 
 
