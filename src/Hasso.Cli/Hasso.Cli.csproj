@@ -73,5 +73,9 @@
   <ItemGroup>
     <Folder Include="Verbs\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\README.md" Link="README.md" />
+  </ItemGroup>
 
 </Project>
