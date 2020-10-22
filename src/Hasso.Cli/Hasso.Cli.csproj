@@ -29,11 +29,12 @@
   
   <!--versioning-->
   <PropertyGroup>
-    <Version>0.3.2</Version>
-    <AssemblyVersion>0.3.2.0</AssemblyVersion>
-    <FileVersion>0.3.2.0</FileVersion>
+    <Version>0.3.3</Version>
+    <AssemblyVersion>0.3.3.0</AssemblyVersion>
+    <FileVersion>0.3.3.0</FileVersion>
     <Copyright>earloc</Copyright>
     <PackageReleaseNotes>
+      0.3.3 - 'split' now serializes id´s with enclosing SingleQoutes
       0.3.2 - avoid extra blank-lines in generated files after split
       0.3.1 - fixes bug where list-style config-yaml´s were not splitted correctly
       0.3.0 - add "compose"-verb for bundling up *.partial.yaml´s into their monolithic counter-parts
