@@ -30,8 +30,8 @@
   action:
   - scene: scene.some_scene_name_2
   mode: single
-- id: 'some_automation_name_3'
-  alias: some_automation_name_3
+- id: '123321'
+  alias: some_automation_name_3_Repro_For_GitHub_Issue_No22
   description: ''
   trigger:
   - platform: state

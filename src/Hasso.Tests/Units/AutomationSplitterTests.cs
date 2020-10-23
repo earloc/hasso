@@ -78,5 +78,18 @@ namespace Hasso.Tests.Units
                 actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
         }
+
+        [Theory]
+        [InlineData("assets/automations.yaml")]
+        public async Task AutomationTrigger_Arguments_Are_Serialized_With_Enclosing_SingleQuotes(string inputFileName)
+        {
+            var sut = this.fixture.SystemUnderTest;
+
+            var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
+
+            var fragment = fragments.FirstOrDefault(x => x.Name == "some_automation_name_3_Repro_For_GitHub_Issue_No22");
+
+            fragment.Should().NotBeNull("this is the fragment this test relies on");
+        }
     }
 }
