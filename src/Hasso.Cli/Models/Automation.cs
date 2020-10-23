@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq.Expressions;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -30,7 +31,7 @@ namespace Hasso.Models
         public string Mode { get; set; } = "Single";
 
 
-        internal class TriggerType : DynamicObject
+        internal class TriggerType
         {
             [YamlMember(Alias = "from", ScalarStyle = ScalarStyle.SingleQuoted)]
             public string? From { get; set; }
@@ -38,24 +39,15 @@ namespace Hasso.Models
             public string? To { get; set; }
             [YamlMember(Alias = "platform")]
             public string? Platform { get; set; }
+            [YamlMember(Alias = "type")]
+            public string? Type { get; set; }
+            [YamlMember(Alias = "device_id")]
+            public string? DeviceId { get; set; }
+            [YamlMember(Alias = "entity_id")]
+            public string? EntityId { get; set; }
+            [YamlMember(Alias = "domain")]
+            public string? Domain { get; set; }
 
-
-
-            public override bool TrySetMember(SetMemberBinder binder, object value)
-            {
-                Action action = binder.Name switch
-                {
-                    nameof(Platform) => () => Platform = (string)value,
-                    nameof(From) => () => From = (string)value,
-                    nameof(To) => () => To = (string)value,
-
-                    _ => () => base.TrySetMember(binder, value)
-                };
-
-                action();
-
-                return true;
-            }
         }
     }
 }

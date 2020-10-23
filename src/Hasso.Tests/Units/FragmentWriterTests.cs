@@ -71,8 +71,6 @@ namespace Hasso.Tests.Units
 
             var expected = @"
 - id: '12345'
-  alias:
-  description:
   trigger:
   - from: '42'
     to: '43'
