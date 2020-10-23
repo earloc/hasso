@@ -41,7 +41,7 @@ namespace Hasso.Cli.Tests.Integrations
 
         [Theory]
         [InlineData("scripts", 2)]
-        [InlineData("automations", 2)]
+        [InlineData("automations", 3)]
         [InlineData("scenes", 2)]
         [Trait("quality", "crap")]
         public async Task SplitCommand_Produces_Expected_Count_Of_Partial_Yamls(string subDirectory, int expectedFileCount)

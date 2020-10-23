@@ -35,6 +35,7 @@ namespace Hasso.Cli.Split
 
             return fragments;
         }
+
         protected abstract IEnumerable<Fragment> Split(T content);
     }
 }

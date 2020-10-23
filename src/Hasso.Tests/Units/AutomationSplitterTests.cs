@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-
 namespace Hasso.Tests.Units
 {
 
@@ -18,7 +17,7 @@ namespace Hasso.Tests.Units
         }
 
         [Theory]
-        [InlineData("assets/automations.yaml", 2)]
+        [InlineData("assets/automations.yaml", 3)]
         public async Task Automations_Are_Splitted_At_Root_Level(string inputFileName, int expectedSplittedItemCount)
         {
             var sut = this.fixture.SystemUnderTest;
