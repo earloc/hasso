@@ -47,10 +47,11 @@ namespace Hasso.Tests.Units
         [Fact]
         public async Task Serializes_TriggerFields_With_Enclosing_SingleQuotes()
         {
-            var fragment = new Fragment {
+            var fragment = new Fragment
+            {
                 Name = "some_automation_name_1",
-                Content = new List<object> { 
-                    new Automation { 
+                Content = new List<object> {
+                    new Automation {
                         Id = "12345",
                         Trigger = new List<TriggerType>()
                         {

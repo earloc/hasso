@@ -1,11 +1,9 @@
 ﻿using FluentAssertions;
-using Hasso.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using static Hasso.Tests.Constants;
 namespace Hasso.Tests.Units
 {
 
