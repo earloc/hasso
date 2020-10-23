@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -16,7 +17,7 @@ namespace Hasso.Models
         public string? Description { get; set; }
 
         [YamlMember(Alias = "trigger")]
-        public List<object> Trigger { get; set; } = new List<object>();
+        public List<ExpandoObject> Trigger { get; set; } = new List<ExpandoObject>();
 
         [YamlMember(Alias = "condition")]
         public List<object> Condition { get; set; } = new List<object>();

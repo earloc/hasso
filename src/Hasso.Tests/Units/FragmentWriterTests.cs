@@ -31,7 +31,7 @@ namespace Hasso.Tests.Units
                 }
             };
 
-            var writer = fixture.FragmentWriter;
+            var writer = fixture.SystemUnderTest;
 
             var files = await writer.WriteAsync(new DirectoryInfo("testOutput"), fragments);
 
@@ -40,6 +40,43 @@ namespace Hasso.Tests.Units
                 .Be(2, "that´s how many fragments we threw into the writer");
 
         }
+
+        [Fact]
+        public async Task Serializes_TriggerFields_With_Enclosing_SingleQuotes()
+        {
+            var fragment = new Fragment {
+                Name = "some_automation_name_1",
+                Content = new List<object> { 
+                    new { 
+                        id = "12345",
+                        trigger = new List<object>()
+                        {
+                            new
+                            {
+                                platform = "state",
+                                from = "42",
+                                to = "43"
+                            }
+                        }
+                    }
+                }
+            };
+
+            var actual = await fixture.SystemUnderTest.WriteAsync(fragment);
+
+            var expected = @"
+- id = '12345'
+  trigger:
+  - platform: state
+    from: '42'
+    to: '43'
+".Trim();
+
+
+            actual.Should().Be(expected);
+
+        }
+
 
     }
 }

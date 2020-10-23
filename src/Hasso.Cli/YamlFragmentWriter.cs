@@ -10,24 +10,24 @@ namespace Hasso.Cli
     internal class YamlFragmentWriter : IFragmentWriter
     {
         private readonly ILogger logger;
+        private readonly ISerializer serializer;
 
         public YamlFragmentWriter(ILogger logger)
         {
             this.logger = logger;
+            serializer = new SerializerBuilder()
+                .Build();
         }
-        public Task<IEnumerable<FileInfo>> WriteAsync(DirectoryInfo baseDirectory, IEnumerable<Fragment> fragments)
+        public async Task<IEnumerable<FileInfo>> WriteAsync(DirectoryInfo baseDirectory, IEnumerable<Fragment> fragments)
         {
             if (!baseDirectory.Exists) baseDirectory.Create();
 
-            var serializer = new SerializerBuilder()
-                .Build();
-
-            var tasks = fragments.Select(_ =>
+            var tasks = fragments.Select(async _ =>
             {
                 var targetFileName = Path.Combine(baseDirectory.FullName, $"{_.Name}.partial.yaml");
                 var targetFile = new FileInfo(targetFileName);
 
-                var content = serializer.Serialize(_.Content);
+                var content = await WriteAsync(_);
 
                 File.WriteAllText(targetFile.FullName, content.Trim());
 
@@ -36,10 +36,12 @@ namespace Hasso.Cli
                 return targetFile;
             }).ToArray().AsEnumerable();
 
-            return Task.FromResult(tasks);
+            return await Task.WhenAll(tasks);
+        }
 
-
-
+        public Task<string> WriteAsync(Fragment fragment)
+        {
+            return Task.FromResult(serializer.Serialize(fragment.Content));
         }
     }
 }
