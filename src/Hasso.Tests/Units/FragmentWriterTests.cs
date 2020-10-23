@@ -56,9 +56,9 @@ namespace Hasso.Tests.Units
                         {
                             new TriggerType
                             {
-                                platform = "state",
-                                from = "42",
-                                to = "43"
+                                Platform = "state",
+                                From = "42",
+                                To = "43"
                             }
                         }
                     }
@@ -78,7 +78,7 @@ namespace Hasso.Tests.Units
     to: '43'
     platform: state
   condition: []
-  action: [],
+  action: []
 mode: Single
 
 ".Trim().Replace(" ", "").Replace(Environment.NewLine, "");

@@ -32,9 +32,12 @@ namespace Hasso.Models
 
         internal class TriggerType : DynamicObject
         {
-            public string? from { get; set; }
-            public string? to { get; set; }
-            public string? platform { get; set; }
+            [YamlMember(Alias = "from", ScalarStyle = ScalarStyle.SingleQuoted)]
+            public string? From { get; set; }
+            [YamlMember(Alias = "to", ScalarStyle = ScalarStyle.SingleQuoted)]
+            public string? To { get; set; }
+            [YamlMember(Alias = "platform")]
+            public string? Platform { get; set; }
 
 
 
@@ -42,9 +45,9 @@ namespace Hasso.Models
             {
                 Action action = binder.Name switch
                 {
-                    nameof(platform) => () => platform = (string)value,
-                    nameof(from) => () => from = (string)value,
-                    nameof(to) => () => to = (string)value,
+                    nameof(Platform) => () => Platform = (string)value,
+                    nameof(From) => () => From = (string)value,
+                    nameof(To) => () => To = (string)value,
 
                     _ => () => base.TrySetMember(binder, value)
                 };
