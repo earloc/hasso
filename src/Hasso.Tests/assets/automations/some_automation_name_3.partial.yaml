@@ -1,0 +1,15 @@
+- id: 'some_automation_name_3'
+  alias: some_automation_name_3
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_number.some_input_number_3
+    from: '42'
+    to: '43'
+  condition:
+  - condition: time
+    after: '02:00:00'
+    before: 03:00:00
+  action:
+  - scene: scene.some_scene_name_2
+  mode: single
