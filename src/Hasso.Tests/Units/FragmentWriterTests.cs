@@ -1,10 +1,13 @@
 ﻿using FluentAssertions;
 using Hasso.Cli;
+using Hasso.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using static Hasso.Models.Automation;
 
 namespace Hasso.Tests.Units
 {
@@ -47,11 +50,11 @@ namespace Hasso.Tests.Units
             var fragment = new Fragment {
                 Name = "some_automation_name_1",
                 Content = new List<object> { 
-                    new { 
-                        id = "12345",
-                        trigger = new List<object>()
+                    new Automation { 
+                        Id = "12345",
+                        Trigger = new List<TriggerType>()
                         {
-                            new
+                            new TriggerType
                             {
                                 platform = "state",
                                 from = "42",
@@ -62,15 +65,23 @@ namespace Hasso.Tests.Units
                 }
             };
 
-            var actual = await fixture.SystemUnderTest.WriteAsync(fragment);
+            var content = await fixture.SystemUnderTest.WriteAsync(fragment);
+
+            var actual = content.Replace(" ", "").Replace(Environment.NewLine, "");
 
             var expected = @"
-- id = '12345'
+- id: '12345'
+  alias:
+  description:
   trigger:
-  - platform: state
-    from: '42'
+  - from: '42'
     to: '43'
-".Trim();
+    platform: state
+  condition: []
+  action: [],
+mode: Single
+
+".Trim().Replace(" ", "").Replace(Environment.NewLine, "");
 
 
             actual.Should().Be(expected);
