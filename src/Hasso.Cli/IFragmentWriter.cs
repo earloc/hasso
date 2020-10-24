@@ -7,6 +7,5 @@ namespace Hasso.Cli
     internal interface IFragmentWriter
     {
         public Task<IEnumerable<FileInfo>> WriteAsync(DirectoryInfo baseDirectory, IEnumerable<Fragment> fragments);
-        Task<string> WriteAsync(Fragment fragment);
     }
 }

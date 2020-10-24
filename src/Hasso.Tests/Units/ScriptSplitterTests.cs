@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -56,9 +57,8 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = (IDictionary<object, object>)fragment.Content;
-                actual.Count
-                    .Should()
+                var actual = Regex.Matches(fragment.Content, $"^.*:{Environment.NewLine}").Count;
+                actual.Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
         }

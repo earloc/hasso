@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 namespace Hasso.Tests.Units
@@ -53,12 +53,10 @@ namespace Hasso.Tests.Units
 
             var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
-
             foreach (var fragment in fragments)
             {
-                var actual = (IList<object>)fragment.Content;
-                actual?.Count
-                    .Should()
+                var actual = Regex.Matches(fragment.Content, "- id: ").Count;
+                actual.Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
         }
@@ -73,9 +71,87 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.ToString();
+                var actual = fragment.Content;
                 actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
+        }
+
+        [Fact]
+        public async Task Deserializes_AdditionalProperties_Of_Automation()
+        {
+            var yaml = @"---
+                - id: '1234'
+                  alias: alias1234
+                  some_unknown_field: 42
+                - id: '4569'
+                  alias: alias4569
+                  some_unknown_field: 43
+";
+
+            var automation = await fixture.SystemUnderTest.SplitAsync(yaml);
+            var fragment = automation.First();
+
+            var actual = fragment.Content
+                .AsOneLiner();
+
+            var expected = @"
+                - id: '1234'
+                  alias: alias1234
+                  some_unknown_field: 42"
+                .AsOneLiner();
+
+            actual.Should().Be(expected, "splitting up yamls should not modify a fragments content");
+        }
+
+        [Fact]
+        [Trait("issue", "#23")]
+        [Trait("bug", "missing property 'at', 'tag_id'")]
+        public async Task Can_Serialize_Fields_On_Trigger()
+        {
+            var yaml = @"
+                    - id: '12345'
+                      alias: alias1234
+                      trigger:
+                      - at: '01:23:45'
+                        tag_id: tagid123
+            ";
+
+            var fragments = await fixture.SystemUnderTest.SplitAsync(yaml);
+
+            var content = fragments.First().Content;
+
+            var actual = content.AsOneLiner();
+
+            var expected = yaml.AsOneLiner();
+
+
+            actual.Should().Be(expected);
+
+        }
+
+        [Fact]
+        [Trait("issue", "#22")]
+        [Trait("bug", "missing SingleQoutes on 'from' and 'to' of trigger")]
+        public async Task Serializes_TriggerFields_With_Enclosing_SingleQuotes()
+        {
+            var yaml = @"
+                    - id: '12345'
+                      alias: alias1234
+                      trigger:
+                      - platform: state
+                        from: '42'
+                        to: '43'
+            ";
+
+            var fragments = await fixture.SystemUnderTest.SplitAsync(yaml);
+
+            var content = fragments.First().Content;
+
+            var actual = content.AsOneLiner();
+
+            var expected = yaml.AsOneLiner();
+
+            actual.Should().Be(expected);
         }
     }
 }
