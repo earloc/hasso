@@ -14,7 +14,5 @@ namespace Hasso.Cli
         public string? Name { get; set; } = null;
 
         public string Content { get; set; } = "";
-
-        public override string ToString() => serializer.Serialize(Content);
     }
 }

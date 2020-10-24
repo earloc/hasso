@@ -1,7 +1,9 @@
 ﻿using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using YamlDotNet.RepresentationModel;
 
 namespace Hasso.Cli.Split
@@ -17,18 +19,29 @@ namespace Hasso.Cli.Split
 
         protected override IEnumerable<Fragment> Split(YamlDocument yaml)
         {
-            //var fragments = content.Select(item =>
-            //{
-            //    return new Fragment
-            //    {
-            //        Name = item.Alias,
-            //        Content = new List<object> { item }
-            //    };
-            //});
+            var fragments = new List<Fragment>();
 
-            //return fragments;
+            var sequence = yaml.RootNode as YamlSequenceNode;
 
-            throw new NotImplementedException();
+            foreach (var child in sequence.Children)
+            {
+                var singleSequence = new YamlSequenceNode();
+                singleSequence.Add(child);
+
+                var childDocument = new YamlDocument(singleSequence);
+                var childStream = new YamlStream(childDocument);
+                var builder = new StringBuilder();
+                using var writer = new StringWriter(builder);
+                childStream.Save(writer);
+
+                fragments.Add(new Fragment()
+                {
+                    Name = child["alias"].ToString(),
+                    Content = builder.ToString().Replace($"{Environment.NewLine}...", "")
+                }) ;
+            }
+
+            return fragments;
         }
     }
 }

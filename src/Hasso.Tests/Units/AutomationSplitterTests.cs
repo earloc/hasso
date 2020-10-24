@@ -53,7 +53,6 @@ namespace Hasso.Tests.Units
 
             var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
-
             foreach (var fragment in fragments)
             {
                 var actual = fragment.Content;
@@ -73,7 +72,7 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.ToString();
+                var actual = fragment.Content;
                 actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
         }
@@ -81,20 +80,28 @@ namespace Hasso.Tests.Units
         [Fact]
         public async Task Deserializes_AdditionalProperties_Of_Automation()
         {
-            var yaml = @"
-- id: '1234'
-  alias: alias1234
-  some_unknown_field: 42
-".Trim();
+            var yaml =@"---
+                - id: '1234'
+                  alias: alias1234
+                  some_unknown_field: 42
+                - id: '4569'
+                  alias: alias4569
+                  some_unknown_field: 43
+";
 
             var automation = await fixture.SystemUnderTest.SplitAsync(yaml);
-            var actual = automation.First();
+            var fragment = automation.First();
 
-            //actual.Id.Should().Be("1234", "thats the value from the specified yaml");
-            //actual.Alias.Should().Be("alias1234", "thats the value from the specified yaml");
-            //actual["some_unknown_field"].Should().Be("alias1234", "thats the value from the specified yaml");
+            var actual = fragment.Content
+                .AsOneLiner();
 
-            false.Should().BeTrue("this test is not finished");
+            var expected = @"
+                - id: '1234'
+                  alias: alias1234
+                  some_unknown_field: 42"
+                .AsOneLiner();
+
+            actual.Should().Be(expected, "splitting up yamls should not modify a fragments content");
         }
     }
 }
