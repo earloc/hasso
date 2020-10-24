@@ -102,5 +102,56 @@ namespace Hasso.Tests.Units
 
             actual.Should().Be(expected, "splitting up yamls should not modify a fragments content");
         }
+
+        [Fact]
+        [Trait("issue", "#23")]
+        [Trait("bug", "missing property 'at', 'tag_id'")]
+        public async Task Can_Serialize_Fields_On_Trigger()
+        {
+            var yaml = @"
+                    - id: '12345'
+                      alias: alias1234
+                      trigger:
+                      - at: '01:23:45'
+                        tag_id: tagid123
+            ";
+
+            var fragments = await fixture.SystemUnderTest.SplitAsync(yaml);
+
+            var content = fragments.First().Content;
+
+            var actual = content.AsOneLiner();
+
+            var expected = yaml.AsOneLiner();
+
+
+            actual.Should().Be(expected);
+
+        }
+
+        [Fact]
+        [Trait("issue", "#22")]
+        [Trait("bug", "missing SingleQoutes on 'from' and 'to' of trigger")]
+        public async Task Serializes_TriggerFields_With_Enclosing_SingleQuotes()
+        {
+            var yaml = @"
+                    - id: '12345'
+                      alias: alias1234
+                      trigger:
+                      - platform: state
+                        from: '42'
+                        to: '43'
+            ";
+
+            var fragments = await fixture.SystemUnderTest.SplitAsync(yaml);
+
+            var content = fragments.First().Content;
+
+            var actual = content.AsOneLiner();
+
+            var expected = yaml.AsOneLiner();
+
+            actual.Should().Be(expected);
+        }
     }
 }
