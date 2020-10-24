@@ -91,8 +91,8 @@ mode: Single
 
         [Fact]
         [Trait("issue", "#23")]
-        [Trait("bug", "missing property 'at'")]
-        public async Task Can_Serialize_Field_At_On_Trigger()
+        [Trait("bug", "missing property 'at', 'tag_id'")]
+        public async Task Can_Serialize_Fields_On_Trigger()
         {
             var fragment = new Fragment
             {
@@ -104,7 +104,8 @@ mode: Single
                         {
                             new Trigger
                             {
-                                At = "01:23:45"
+                                At = "01:23:45",
+                                TagId = "tagid123"
                             }
                         }
                     }
@@ -119,6 +120,7 @@ mode: Single
 - id: '12345'
   trigger:
   - at: 01:23:45
+    tag_id: tagid123
   condition: []
   action: []
 mode: Single

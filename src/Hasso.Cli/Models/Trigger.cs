@@ -29,5 +29,8 @@ namespace Hasso.Models
         [YamlMember(Alias = "at")]
         public string? At { get; set; }
 
+        [YamlMember(Alias = "tag_id")]
+        public string? TagId { get; set; }
+
     }
 }
