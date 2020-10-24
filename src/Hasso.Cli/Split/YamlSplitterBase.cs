@@ -76,7 +76,7 @@ namespace Hasso.Cli.Split
                 var childStream = new YamlStream(childDocument);
                 var builder = new StringBuilder();
                 using var writer = new StringWriter(builder);
-                childStream.Save(writer);
+                childStream.Save(writer, false);
 
                 fragments.Add(new Fragment()
                 {
@@ -101,7 +101,7 @@ namespace Hasso.Cli.Split
                 var childStream = new YamlStream(childDocument);
                 var builder = new StringBuilder();
                 using var writer = new StringWriter(builder);
-                childStream.Save(writer);
+                childStream.Save(writer, false);
 
                 fragments.Add(new Fragment()
                 {
