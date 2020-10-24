@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -54,13 +55,11 @@ namespace Hasso.Tests.Units
 
             var fragments = await sut.SplitAsync(new FileInfo(inputFileName));
 
-
             foreach (var fragment in fragments)
             {
-                var actual = fragment.Content;
-                actual?.Count()
-                    .Should()
-                    .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
+                var actual = Regex.Matches(fragment.Content, "- id: ").Count;
+                actual.Should()
+                    .Be(1, "when a scene has been splitted, a single fragment should only contain a single scene");
             }
         }
 
@@ -74,7 +73,7 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.ToString();
+                var actual = fragment.Content;
                 actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
         }

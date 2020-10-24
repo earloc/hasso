@@ -8,29 +8,12 @@ using YamlDotNet.RepresentationModel;
 namespace Hasso.Cli.Split
 {
 
-    internal class YamlSceneSplitter : YamlSplitter
+    internal class YamlSceneSplitter : YamlSplitterBase
     {
-        public YamlSceneSplitter(ILogger logger) : base(logger)
+        public YamlSceneSplitter(ILogger logger) : base(logger, "name")
         {
         }
 
         public override string SourceName => "scenes";
-
-        protected override IEnumerable<Fragment> Split(YamlDocument yaml)
-        {
-            //var fragments = content.Select(item =>
-            //{
-            //    return new Fragment
-            //    {
-            //        Name = item.Name,
-            //        Content = new List<object> { item }
-            //    };
-
-            //});
-
-            //return fragments;
-
-            throw new NotImplementedException();
-        }
     }
 }

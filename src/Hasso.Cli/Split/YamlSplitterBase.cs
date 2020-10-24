@@ -12,14 +12,16 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal abstract class YamlSplitter : ISplitter
+    internal abstract class YamlSplitterBase : ISplitter
     {
         protected readonly ILogger logger;
+        private readonly string nameIdentifier;
         private readonly IDeserializer deserializer;
 
-        protected YamlSplitter(ILogger logger)
+        protected YamlSplitterBase(ILogger logger, string nameIdentifier)
         {
             this.logger = logger;
+            this.nameIdentifier = nameIdentifier;
             deserializer = new DeserializerBuilder().Build();
         }
 
@@ -52,6 +54,64 @@ namespace Hasso.Cli.Split
             return fragments;
         }
 
-        protected abstract IEnumerable<Fragment> Split(YamlDocument yaml);
+        private IEnumerable<Fragment> Split(YamlDocument yaml)
+        {
+            switch (yaml.RootNode)
+            {
+                case YamlSequenceNode sequence: return Split(sequence);
+                case YamlMappingNode mapping: return Split(mapping);
+                default: throw new NotImplementedException();
+            }
+        }
+
+        private IEnumerable<Fragment> Split(YamlMappingNode mapping)
+        {
+            var fragments = new List<Fragment>();
+
+            foreach (var child in mapping)
+            {
+                var singleMapping = new YamlMappingNode();
+                singleMapping.Add(child.Key, child.Value);
+
+                var childDocument = new YamlDocument(singleMapping);
+                var childStream = new YamlStream(childDocument);
+                var builder = new StringBuilder();
+                using var writer = new StringWriter(builder);
+                childStream.Save(writer);
+
+                fragments.Add(new Fragment()
+                {
+                    Name = child.Key.ToString(),
+                    Content = builder.ToString().Replace($"{Environment.NewLine}...", "")
+                });
+            }
+
+            return fragments;
+        }
+
+        private IEnumerable<Fragment> Split(YamlSequenceNode sequence)
+        {
+            var fragments = new List<Fragment>();
+
+            foreach (var child in sequence.Children)
+            {
+                var singleSequence = new YamlSequenceNode();
+                singleSequence.Add(child);
+
+                var childDocument = new YamlDocument(singleSequence);
+                var childStream = new YamlStream(childDocument);
+                var builder = new StringBuilder();
+                using var writer = new StringWriter(builder);
+                childStream.Save(writer);
+
+                fragments.Add(new Fragment()
+                {
+                    Name = child[nameIdentifier].ToString(),
+                    Content = builder.ToString().Replace($"{Environment.NewLine}...", "")
+                });
+            }
+
+            return fragments;
+        }
     }
 }

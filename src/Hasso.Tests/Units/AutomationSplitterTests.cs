@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 namespace Hasso.Tests.Units
@@ -55,9 +56,8 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = fragment.Content;
-                actual?.Count()
-                    .Should()
+                var actual = Regex.Matches(fragment.Content, "- id: ").Count;
+                actual.Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
         }
