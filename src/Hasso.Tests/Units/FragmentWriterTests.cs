@@ -45,6 +45,8 @@ namespace Hasso.Tests.Units
         }
 
         [Fact]
+        [Trait("issue", "#22")]
+        [Trait("bug", "missing SingleQoutes on 'from' and 'to' of trigger")]
         public async Task Serializes_TriggerFields_With_Enclosing_SingleQuotes()
         {
             var fragment = new Fragment
@@ -87,6 +89,45 @@ mode: Single
 
         }
 
+        [Fact]
+        [Trait("issue", "#23")]
+        [Trait("bug", "missing property 'at'")]
+        public async Task Can_Serialize_Field_At_On_Trigger()
+        {
+            var fragment = new Fragment
+            {
+                Name = "some_automation_name_1",
+                Content = new List<object> {
+                    new Automation {
+                        Id = "12345",
+                        Trigger = new List<TriggerType>()
+                        {
+                            new TriggerType
+                            {
+                                At = "01:23:45"
+                            }
+                        }
+                    }
+                }
+            };
 
+            var content = await fixture.SystemUnderTest.WriteAsync(fragment);
+
+            var actual = content.Replace(" ", "").Replace(Environment.NewLine, "");
+
+            var expected = @"
+- id: '12345'
+  trigger:
+  - at: 01:23:45
+  condition: []
+  action: []
+mode: Single
+
+".Trim().Replace(" ", "").Replace(Environment.NewLine, "");
+
+
+            actual.Should().Be(expected);
+
+        }
     }
 }
