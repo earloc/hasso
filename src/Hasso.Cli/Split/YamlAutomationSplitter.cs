@@ -1,10 +1,4 @@
 ﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using YamlDotNet.RepresentationModel;
 
 namespace Hasso.Cli.Split
 {
@@ -17,6 +11,6 @@ namespace Hasso.Cli.Split
 
         public override string SourceName => "automations";
 
-        
+
     }
 }

@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 
@@ -41,7 +40,7 @@ namespace Hasso.Cli.Split
             using var reader = new StringReader(yaml);
             var stream = new YamlStream();
 
-            await Task.Run( () => stream.Load(reader));
+            await Task.Run(() => stream.Load(reader));
 
             var yamlDocument = stream.Documents.FirstOrDefault();
 

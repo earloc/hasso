@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -80,7 +79,7 @@ namespace Hasso.Tests.Units
         [Fact]
         public async Task Deserializes_AdditionalProperties_Of_Automation()
         {
-            var yaml =@"---
+            var yaml = @"---
                 - id: '1234'
                   alias: alias1234
                   some_unknown_field: 42

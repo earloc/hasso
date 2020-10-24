@@ -1,5 +1,4 @@
-﻿using YamlDotNet.RepresentationModel;
-using YamlDotNet.Serialization;
+﻿using YamlDotNet.Serialization;
 
 namespace Hasso.Cli
 {
