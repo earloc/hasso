@@ -16,7 +16,7 @@ namespace Hasso.Models
         public string? Description { get; set; }
 
         [YamlMember(Alias = "trigger")]
-        public List<TriggerType> Trigger { get; set; } = new List<TriggerType>();
+        public List<Trigger> Trigger { get; set; } = new List<Trigger>();
 
         [YamlMember(Alias = "condition")]
         public List<object> Condition { get; set; } = new List<object>();

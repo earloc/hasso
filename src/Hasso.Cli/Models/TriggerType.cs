@@ -3,7 +3,7 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Models
 {
-    internal class TriggerType
+    internal class Trigger
     {
         [YamlMember(Alias = "from", ScalarStyle = ScalarStyle.SingleQuoted)]
         public string? From { get; set; }

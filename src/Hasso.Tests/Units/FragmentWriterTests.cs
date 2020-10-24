@@ -55,9 +55,9 @@ namespace Hasso.Tests.Units
                 Content = new List<object> {
                     new Automation {
                         Id = "12345",
-                        Trigger = new List<TriggerType>()
+                        Trigger = new List<Trigger>()
                         {
-                            new TriggerType
+                            new Trigger
                             {
                                 Platform = "state",
                                 From = "42",
@@ -100,9 +100,9 @@ mode: Single
                 Content = new List<object> {
                     new Automation {
                         Id = "12345",
-                        Trigger = new List<TriggerType>()
+                        Trigger = new List<Trigger>()
                         {
-                            new TriggerType
+                            new Trigger
                             {
                                 At = "01:23:45"
                             }
