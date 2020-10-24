@@ -12,12 +12,12 @@ using YamlDotNet.Serialization;
 
 namespace Hasso.Cli.Split
 {
-    internal abstract class YamlSplitterBase : ISplitter
+    internal abstract class YamlSplitter : ISplitter
     {
         protected readonly ILogger logger;
         private readonly IDeserializer deserializer;
 
-        protected YamlSplitterBase(ILogger logger)
+        protected YamlSplitter(ILogger logger)
         {
             this.logger = logger;
             deserializer = new DeserializerBuilder().Build();
@@ -32,8 +32,6 @@ namespace Hasso.Cli.Split
             var content = await SplitAsync(yaml);
 
             return content;
-
-            
         }
 
         public async Task<IEnumerable<Fragment>> SplitAsync(string yaml)

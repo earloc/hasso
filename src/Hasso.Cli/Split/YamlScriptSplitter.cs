@@ -6,7 +6,7 @@ using YamlDotNet.RepresentationModel;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlScriptSplitter : YamlSplitterBase
+    internal class YamlScriptSplitter : YamlSplitter
     {
         public YamlScriptSplitter(ILogger logger) : base(logger)
         {
