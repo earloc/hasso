@@ -8,5 +8,6 @@ namespace Hasso.Cli.Split
     {
         public string SourceName { get; }
         public Task<IEnumerable<Fragment>> SplitAsync(FileInfo inputFile);
+        public Task<IEnumerable<Fragment>> SplitAsync(string yaml);
     }
 }

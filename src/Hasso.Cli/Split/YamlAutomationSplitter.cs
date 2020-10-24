@@ -1,11 +1,12 @@
-﻿using Hasso.Models;
-using Serilog;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using YamlDotNet.RepresentationModel;
 
 namespace Hasso.Cli.Split
 {
-    internal class YamlAutomationSplitter : YamlSplitterBase<List<Automation>>
+    internal class YamlAutomationSplitter : YamlSplitterBase
     {
 
         public YamlAutomationSplitter(ILogger logger) : base(logger)
@@ -14,18 +15,20 @@ namespace Hasso.Cli.Split
 
         public override string SourceName => "automations";
 
-        protected override IEnumerable<Fragment> Split(List<Automation> content)
+        protected override IEnumerable<Fragment> Split(YamlDocument yaml)
         {
-            var fragments = content.Select(item =>
-            {
-                return new Fragment
-                {
-                    Name = item.Alias,
-                    Content = new List<object> { item }
-                };
-            });
+            //var fragments = content.Select(item =>
+            //{
+            //    return new Fragment
+            //    {
+            //        Name = item.Alias,
+            //        Content = new List<object> { item }
+            //    };
+            //});
 
-            return fragments;
+            //return fragments;
+
+            throw new NotImplementedException();
         }
     }
 }

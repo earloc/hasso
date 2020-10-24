@@ -1,4 +1,5 @@
-﻿using YamlDotNet.Serialization;
+﻿using YamlDotNet.RepresentationModel;
+using YamlDotNet.Serialization;
 
 namespace Hasso.Cli
 {
@@ -12,7 +13,7 @@ namespace Hasso.Cli
 
         public string? Name { get; set; } = null;
 
-        public object Content { get; set; } = new object();
+        public string Content { get; set; } = "";
 
         public override string ToString() => serializer.Serialize(Content);
     }

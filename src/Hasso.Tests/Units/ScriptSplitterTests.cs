@@ -56,8 +56,8 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = (IDictionary<object, object>)fragment.Content;
-                actual.Count
+                var actual = fragment.Content;
+                actual.Count()
                     .Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }

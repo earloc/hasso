@@ -56,8 +56,8 @@ namespace Hasso.Tests.Units
 
             foreach (var fragment in fragments)
             {
-                var actual = (IList<object>)fragment.Content;
-                actual?.Count
+                var actual = fragment.Content;
+                actual?.Count()
                     .Should()
                     .Be(1, "when a script has been splitted, a single fragment should only contain a single script");
             }
@@ -76,6 +76,25 @@ namespace Hasso.Tests.Units
                 var actual = fragment.ToString();
                 actual.Should().StartWith("- id: '", "this is how list-style elements are represented in yaml");
             }
+        }
+
+        [Fact]
+        public async Task Deserializes_AdditionalProperties_Of_Automation()
+        {
+            var yaml = @"
+- id: '1234'
+  alias: alias1234
+  some_unknown_field: 42
+".Trim();
+
+            var automation = await fixture.SystemUnderTest.SplitAsync(yaml);
+            var actual = automation.First();
+
+            //actual.Id.Should().Be("1234", "thats the value from the specified yaml");
+            //actual.Alias.Should().Be("alias1234", "thats the value from the specified yaml");
+            //actual["some_unknown_field"].Should().Be("alias1234", "thats the value from the specified yaml");
+
+            false.Should().BeTrue("this test is not finished");
         }
     }
 }
