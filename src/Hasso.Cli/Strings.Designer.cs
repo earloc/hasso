@@ -61,6 +61,15 @@ namespace Hasso {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8234.
+        /// </summary>
+        internal static string DefaultUrl {
+            get {
+                return ResourceManager.GetString("DefaultUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ****dotnet-hasso - HomeAssitant-Organizer****
         ///Remember: Always ensure you have a backup-copy of your configuration-files before messin with them. 
         ///Never work on your HommeAssitant-instance directly!

@@ -2,7 +2,7 @@
 
 namespace Hasso.Debugger.App.Lights
 {
-    public interface ILight : INotifyPropertyChanged
+    internal interface ILight : INotifyPropertyChanged
     {
         bool Toggle();
 

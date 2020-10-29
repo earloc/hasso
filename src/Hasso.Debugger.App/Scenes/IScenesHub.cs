@@ -3,7 +3,7 @@ using System;
 
 namespace Hasso.Debugger.App.Scenes
 {
-    public interface IScenesHub
+    internal interface IScenesHub
     {
         string Current { get; set; }
 

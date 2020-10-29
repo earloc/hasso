@@ -2,7 +2,7 @@
 
 namespace Hasso.Debugger.App.Scenes
 {
-    public class InMemoryScenesHub : IScenesHub
+    internal class InMemoryScenesHub : IScenesHub
     {
         private string current = "None";
 

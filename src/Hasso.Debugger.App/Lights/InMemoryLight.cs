@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Hasso.Debugger.App.Lights
 {
-    public class InMemoryLight : ILight
+    internal class InMemoryLight : ILight
     {
         public InMemoryLight(string id)
         {

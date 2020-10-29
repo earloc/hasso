@@ -7,12 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Hasso.Debugger.App
 {
-    public class Startup
+    internal class Startup
     {
-        public Startup(IConfiguration configuration)
+        protected Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -49,6 +51,11 @@ namespace Hasso.Debugger.App
                         Url = new Uri(Strings.LicenseUrl),
                     }
                 });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                swagger.IncludeXmlComments(xmlPath);
             });
 
         }
