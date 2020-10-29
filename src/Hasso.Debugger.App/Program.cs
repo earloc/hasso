@@ -24,8 +24,9 @@ namespace Hasso.Debugger.App
         public static IHostBuilder CreateHostBuilder(string[]? args = null, Action<IWebHostBuilder>? configure = null, ILogger? logger = null)
         {
             var userDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var hassoDirectory = Path.Combine(userDirectory, ".hasso");
 
-            var logFile = new FileInfo(Path.Combine(userDirectory, "hasso.debugger.log.txt"));
+            var logFile = new FileInfo(Path.Combine(hassoDirectory, "hasso.debugger.log.txt"));
 
             Log.Logger = logger = logger ?? new LoggerConfiguration()
                 .MinimumLevel.Debug()

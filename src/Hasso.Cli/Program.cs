@@ -15,7 +15,9 @@ namespace Hasso.Cli
         {
 
             var userDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            var logFile = new FileInfo(Path.Combine(userDirectory, "hasso.log.txt"));
+            var hassoDirectory = Path.Combine(userDirectory, ".hasso");
+
+            var logFile = new FileInfo(Path.Combine(hassoDirectory, "hasso.log.txt"));
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
