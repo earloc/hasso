@@ -14,7 +14,7 @@ namespace Hasso.Cli
     {
 
         private readonly IServiceProvider serviceProvider;
-        private readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
+        private readonly RootCommand rootCommand = new RootCommand();
         private readonly ILogger logger;
 
         public App(ILogger logger)
@@ -68,6 +68,10 @@ namespace Hasso.Cli
                 "-d");
         }
 
-        internal async Task<int> RunAsync(string[] args) => await rootCommand.InvokeAsync(args);
+        internal async Task<int> RunAsync(string[] args)
+        {
+            Console.WriteLine(Strings.Disclaimer);
+            return await rootCommand.InvokeAsync(args);
+        }
     }
 }
