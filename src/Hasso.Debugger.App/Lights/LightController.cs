@@ -11,7 +11,11 @@ namespace Hasso.Debugger.App.Lights
     {
         private readonly ILightsHub lights;
 
-        internal LightController(ILightsHub lights)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lights"></param>
+        public LightController(ILightsHub lights)
         {
             this.lights = lights;
         }

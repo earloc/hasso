@@ -13,7 +13,11 @@ namespace Hasso.Debugger.App.Scenes
     {
         private readonly IScenesHub scenes;
         
-        internal SceneController(IScenesHub scenes)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scenes"></param>
+        public SceneController(IScenesHub scenes)
         {
             this.scenes = scenes;
         }

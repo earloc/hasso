@@ -4,36 +4,101 @@
         <name>Hasso.Debugger.App</name>
     </assembly>
     <members>
+        <member name="T:Hasso.Debugger.App.Lights.ILight">
+            <summary>
+            a light, which can be turned on, off or be toggled
+            </summary>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.ILight.Toggle">
+            <summary>
+            flips the switch and toggles <see cref="P:Hasso.Debugger.App.Lights.ILight.IsEnabled"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILight.IsEnabled">
+            <summary>
+            turns the light on or off
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILight.Id">
+            <summary>
+            light.office_1
+            </summary>
+        </member>
+        <member name="T:Hasso.Debugger.App.Lights.ILightsHub">
+            <summary>
+            A hub for all the lights
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILightsHub.Item(System.String)">
+            <summary>
+            grants access to a light, specified by it´s id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Hasso.Debugger.App.Lights.ILightsHub.LightChanged">
+            <summary>
+            indicates that any of the lights within the hub has changed
+            </summary>
+        </member>
         <member name="T:Hasso.Debugger.App.Lights.LightController">
             <summary>
             api-controller for messing around with lights
             </summary>
         </member>
+        <member name="M:Hasso.Debugger.App.Lights.LightController.#ctor(Hasso.Debugger.App.Lights.ILightsHub)">
+            <summary>
+            
+            </summary>
+            <param name="lights"></param>
+        </member>
         <member name="M:Hasso.Debugger.App.Lights.LightController.Toggle(System.String)">
             <summary>
-            Toggles a light. Will create a new light on demand in adventure mode/>
+            Toggles a light.
             </summary>
             <param name="id">light.office_1</param>
             <returns>the current state of the light (true, false)</returns>
         </member>
         <member name="M:Hasso.Debugger.App.Lights.LightController.Off(System.String)">
             <summary>
-            Turns off a light. Will create a new light on demand in adventure mode/>
+            Turns off a light.
             </summary>
             <param name="id">>light.office_1</param>
             <returns>the current state of the light (true, false)</returns>
         </member>
         <member name="M:Hasso.Debugger.App.Lights.LightController.On(System.String)">
             <summary>
-            Turns on a light. Will create a new light on demand in adventure mode/>
+            Turns on a light.
             </summary>
             <param name="id">>light.office_1</param>
             <returns>the current state of the light (true, false)</returns>
+        </member>
+        <member name="T:Hasso.Debugger.App.Scenes.IScenesHub">
+            <summary>
+            a hub for all the scenes
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Scenes.IScenesHub.Current">
+            <summary>
+            retuns the currently active scene
+            </summary>
+        </member>
+        <member name="E:Hasso.Debugger.App.Scenes.IScenesHub.CurrentChanged">
+            <summary>
+            indicates that <see cref="P:Hasso.Debugger.App.Scenes.IScenesHub.Current"/> has changed
+            </summary>
         </member>
         <member name="T:Hasso.Debugger.App.Scenes.SceneController">
             <summary>
             api-controller for messing around with scenes
             </summary>
+        </member>
+        <member name="M:Hasso.Debugger.App.Scenes.SceneController.#ctor(Hasso.Debugger.App.Scenes.IScenesHub)">
+            <summary>
+            
+            </summary>
+            <param name="scenes"></param>
         </member>
         <member name="M:Hasso.Debugger.App.Scenes.SceneController.Activate(System.String)">
             <summary>
