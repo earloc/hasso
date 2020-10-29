@@ -1,4 +1,5 @@
 ﻿using Hasso.Cli.Compose;
+using Hasso.Cli.Debugger;
 using Hasso.Cli.Split;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -13,7 +14,7 @@ namespace Hasso.Cli
     {
 
         private readonly IServiceProvider serviceProvider;
-        private readonly RootCommand rootCommand = new RootCommand(Strings.Disclaimer);
+        private readonly RootCommand rootCommand = new RootCommand();
         private readonly ILogger logger;
 
         public App(ILogger logger)
@@ -32,7 +33,8 @@ namespace Hasso.Cli
                 .AddSplitters()
                 .AddComposer()
                 .AddFragmentWriter()
-                .AddCommandHandlers();
+                .AddCommandHandlers()
+                .AddAppHost();
         }
 
         internal void ConfigureCommands()
@@ -60,9 +62,16 @@ namespace Hasso.Cli
             AddCommand<ComposeCommandHandler>("compose",
                 "composes multiple partial-yamls into monolithic ones, ready to deploy",
                 "aus!", "implode", "-c");
+
+            AddCommand<DebuggerCommandHandler>("debugger",
+                "starts a web-ui which acts as an automation stub for lights, devices, etc.",
+                "-d");
         }
 
-
-        internal Task<int> RunAsync(string[] args) => rootCommand.InvokeAsync(args);
+        internal async Task<int> RunAsync(string[] args)
+        {
+            Console.WriteLine(Strings.Disclaimer);
+            return await rootCommand.InvokeAsync(args);
+        }
     }
 }

@@ -7,7 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Cli", "Hasso.Cli\Hass
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Tests", "Hasso.Tests\Hasso.Tests.csproj", "{131F20A3-1234-4CB3-BFA7-D0601C19BB43}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hasso.Debugger.App", "Hasso.Debugger.App\Hasso.Debugger.App.csproj", "{82032929-189A-47B2-80CF-DEF0EDEB3AF0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "_.Hasso", "_.Hasso\_.Hasso.shproj", "{97058048-C67D-4EB5-BE86-A5C903553EA5}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		_.Hasso\_.Hasso.projitems*{63edac6a-56ac-4bdd-89a1-860e268d8401}*SharedItemsImports = 5
+		_.Hasso\_.Hasso.projitems*{82032929-189a-47b2-80cf-def0edeb3af0}*SharedItemsImports = 5
+		_.Hasso\_.Hasso.projitems*{97058048-c67d-4eb5-be86-a5c903553ea5}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -21,6 +30,10 @@ Global
 		{131F20A3-1234-4CB3-BFA7-D0601C19BB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{131F20A3-1234-4CB3-BFA7-D0601C19BB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{131F20A3-1234-4CB3-BFA7-D0601C19BB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82032929-189A-47B2-80CF-DEF0EDEB3AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82032929-189A-47B2-80CF-DEF0EDEB3AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82032929-189A-47B2-80CF-DEF0EDEB3AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82032929-189A-47B2-80CF-DEF0EDEB3AF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
