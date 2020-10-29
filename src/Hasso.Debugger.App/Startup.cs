@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace Hasso.Debugger.App
 {
@@ -27,6 +29,27 @@ namespace Hasso.Debugger.App
 
             services.AddSingleton<ILightsHub, InMemoryLightsHub>();
             services.AddSingleton<IScenesHub, InMemoryScenesHub>();
+
+            services.AddSwaggerGen(swagger =>
+            {
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = Strings.ApiTitle,
+                    Description = Strings.ApiDescription,
+                    Contact = new OpenApiContact
+                    {
+                        Name = Strings.GithubProfile,
+                        Email = string.Empty,
+                        Url = new Uri(Strings.GithubProfileUrl),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = Strings.LicenseUsage,
+                        Url = new Uri(Strings.LicenseUrl),
+                    }
+                });
+            });
 
         }
 
@@ -61,6 +84,13 @@ namespace Hasso.Debugger.App
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(swagger =>
+            {
+                swagger.SwaggerEndpoint("/swagger/v1/swagger.json", Strings.ApiTitle);
             });
         }
     }
