@@ -109,6 +109,17 @@ which then can be deployed back onto your HA-instance, easily.
 
 > german folks may also try ```dotnet hasso aus!``` ;)
 
+
+## Debugger
+
+Invoking ``` dotnet hasso debugger ``` will fire up a simple web-ui and web-api which can be used as a devices stub.
+This can come in handy, when you´re playing around with new automations or scripts, but don´t want the actual devices to respond to the commands they get send from home-assistant.
+
+Seting up the debugger to recieve calls instead of the actual devices currently involves some branching within scripts and automations, which I might cover in a later ost or update of this readme.
+
+Stay tuned for updates.
+
+
 # But...why?
 
 I recently started tackling around with home-automation, where I found myself doing a lot of repetitive tasks involving
