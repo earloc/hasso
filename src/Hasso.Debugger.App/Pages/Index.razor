@@ -1,0 +1,31 @@
+﻿@page "/"
+@inject ILightsHub lights;
+@inject IScenesHub scenes;
+
+
+<h1>hasso debugger ui for home-assistant</h1>
+
+<h2>Lights</h2>
+
+<ul>
+
+  @foreach (var light in lights)
+  {
+    <li>@light.Id : @light.IsEnabled</li>
+  }
+</ul>
+
+
+<h2>Scene: @scenes.Current</h2>
+
+@functions {
+    protected override void OnInitialized()
+    {
+      base.OnInitialized();
+
+      lights.LightChanged += (sender, e) => this.InvokeAsync(() => this.StateHasChanged());
+      scenes.CurrentChanged += (sender, e) => this.InvokeAsync(() => this.StateHasChanged());
+
+    }
+
+}

@@ -1,6 +1,7 @@
 ﻿
 using Hasso.Cli;
 using Hasso.Cli.Compose;
+using Hasso.Cli.Debugger;
 using Hasso.Cli.Split;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -40,8 +41,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             that.AddTransient<SplitCommandHandler, SplitCommandHandler>();
             that.AddTransient<ComposeCommandHandler, ComposeCommandHandler>();
+            that.AddTransient<DebuggerCommandHandler, DebuggerCommandHandler>();
 
+            return that;
+        }
 
+        public static IServiceCollection AddAppHost(this IServiceCollection that)
+        {
+            that.AddSingleton<IAppHost, ConsoleAppHost>();
             return that;
         }
     }
