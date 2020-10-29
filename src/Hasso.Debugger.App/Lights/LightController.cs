@@ -15,7 +15,7 @@ namespace Hasso.Debugger.App.Lights
         public bool Off(string id, [FromServices] ILightsHub lights) => lights[id].IsEnabled = false;
 
         [HttpGet("{id}/on")]
-        [HttpPut("{id}/on")]
+        [HttpPut("{id}")]
         public bool On(string id, [FromServices] ILightsHub lights) => lights[id].IsEnabled = true;
 
     }
