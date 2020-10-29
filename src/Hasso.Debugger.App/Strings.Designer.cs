@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hasso {
+namespace Hasso.Debugger.App {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Hasso {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hasso.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hasso.Debugger.App.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,23 +61,56 @@ namespace Hasso {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8234.
+        ///   Looks up a localized string similar to web-api to controll hasso-debugger-ui.
         /// </summary>
-        internal static string DefaultUrl {
+        internal static string ApiDescription {
             get {
-                return ResourceManager.GetString("DefaultUrl", resourceCulture);
+                return ResourceManager.GetString("ApiDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ****dotnet-hasso - HomeAssitant-Organizer****
-        ///Remember: Always ensure you have a backup-copy of your configuration-files before messin with them. 
-        ///Never work on your HommeAssitant-instance directly!
-        ///THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND..
+        ///   Looks up a localized string similar to hasso-debugger-api.
         /// </summary>
-        internal static string Disclaimer {
+        internal static string ApiTitle {
             get {
-                return ResourceManager.GetString("Disclaimer", resourceCulture);
+                return ResourceManager.GetString("ApiTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to earloc.
+        /// </summary>
+        internal static string GithubProfile {
+            get {
+                return ResourceManager.GetString("GithubProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/earloc.
+        /// </summary>
+        internal static string GithubProfileUrl {
+            get {
+                return ResourceManager.GetString("GithubProfileUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/earloc/hasso/main/LICENSE.
+        /// </summary>
+        internal static string LicenseUrl {
+            get {
+                return ResourceManager.GetString("LicenseUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use under MIT.
+        /// </summary>
+        internal static string LicenseUsage {
+            get {
+                return ResourceManager.GetString("LicenseUsage", resourceCulture);
             }
         }
     }

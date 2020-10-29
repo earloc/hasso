@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hasso.Debugger.App</name>
+    </assembly>
+    <members>
+        <member name="T:Hasso.Debugger.App.Lights.ILight">
+            <summary>
+            a light, which can be turned on, off or be toggled
+            </summary>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.ILight.Toggle">
+            <summary>
+            flips the switch and toggles <see cref="P:Hasso.Debugger.App.Lights.ILight.IsEnabled"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILight.IsEnabled">
+            <summary>
+            turns the light on or off
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILight.Id">
+            <summary>
+            light.office_1
+            </summary>
+        </member>
+        <member name="T:Hasso.Debugger.App.Lights.ILightsHub">
+            <summary>
+            A hub for all the lights
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Lights.ILightsHub.Item(System.String)">
+            <summary>
+            grants access to a light, specified by it´s id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Hasso.Debugger.App.Lights.ILightsHub.LightChanged">
+            <summary>
+            indicates that any of the lights within the hub has changed
+            </summary>
+        </member>
+        <member name="T:Hasso.Debugger.App.Lights.LightController">
+            <summary>
+            api-controller for messing around with lights
+            </summary>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.LightController.#ctor(Hasso.Debugger.App.Lights.ILightsHub)">
+            <summary>
+            
+            </summary>
+            <param name="lights"></param>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.LightController.Toggle(System.String)">
+            <summary>
+            Toggles a light.
+            </summary>
+            <param name="id">light.office_1</param>
+            <returns>the current state of the light (true, false)</returns>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.LightController.Off(System.String)">
+            <summary>
+            Turns off a light.
+            </summary>
+            <param name="id">>light.office_1</param>
+            <returns>the current state of the light (true, false)</returns>
+        </member>
+        <member name="M:Hasso.Debugger.App.Lights.LightController.On(System.String)">
+            <summary>
+            Turns on a light.
+            </summary>
+            <param name="id">>light.office_1</param>
+            <returns>the current state of the light (true, false)</returns>
+        </member>
+        <member name="T:Hasso.Debugger.App.Scenes.IScenesHub">
+            <summary>
+            a hub for all the scenes
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Scenes.IScenesHub.Current">
+            <summary>
+            retuns the currently active scene
+            </summary>
+        </member>
+        <member name="E:Hasso.Debugger.App.Scenes.IScenesHub.CurrentChanged">
+            <summary>
+            indicates that <see cref="P:Hasso.Debugger.App.Scenes.IScenesHub.Current"/> has changed
+            </summary>
+        </member>
+        <member name="T:Hasso.Debugger.App.Scenes.SceneController">
+            <summary>
+            api-controller for messing around with scenes
+            </summary>
+        </member>
+        <member name="M:Hasso.Debugger.App.Scenes.SceneController.#ctor(Hasso.Debugger.App.Scenes.IScenesHub)">
+            <summary>
+            
+            </summary>
+            <param name="scenes"></param>
+        </member>
+        <member name="M:Hasso.Debugger.App.Scenes.SceneController.Activate(System.String)">
+            <summary>
+            activates a scene
+            </summary>
+            <param name="id">scene.some_scene_name_1</param>
+        </member>
+        <member name="T:Hasso.Debugger.App.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.ApiDescription">
+            <summary>
+              Looks up a localized string similar to web-api to controll hasso-debugger-ui.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.ApiTitle">
+            <summary>
+              Looks up a localized string similar to hasso-debugger-api.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.GithubProfile">
+            <summary>
+              Looks up a localized string similar to earloc.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.GithubProfileUrl">
+            <summary>
+              Looks up a localized string similar to https://github.com/earloc.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.LicenseUrl">
+            <summary>
+              Looks up a localized string similar to https://raw.githubusercontent.com/earloc/hasso/main/LICENSE.
+            </summary>
+        </member>
+        <member name="P:Hasso.Debugger.App.Strings.LicenseUsage">
+            <summary>
+              Looks up a localized string similar to Use under MIT.
+            </summary>
+        </member>
+    </members>
+</doc>

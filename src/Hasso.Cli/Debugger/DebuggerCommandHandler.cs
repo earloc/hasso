@@ -18,17 +18,12 @@ namespace Hasso.Cli.Debugger
             this.app = app;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uri">defaults to "http://localhost:8234"</param>
-        /// <param name="launchBrowser"></param>
-        /// <returns></returns>
-        public async Task ExecuteAsync(Uri? uri = null, bool launchBrowser = true)
-        {
-            var hostUri = uri ?? new Uri("http://localhost:8234");
 
-            var builder = Hasso.Debugger.App.Program.CreateHostBuilder(new string[0], webHost => webHost.UseUrls(hostUri.ToString()), logger);
+        public async Task ExecuteAsync(Uri? url = null, bool launchBrowser = true)
+        {
+            var hostUrl = url ?? new Uri(Strings.DefaultUrl);
+
+            var builder = Hasso.Debugger.App.Program.CreateHostBuilder(new string[0], webHost => webHost.UseUrls(hostUrl.ToString()), logger);
 
             logger.Information("starting debugger web-app");
 
@@ -39,7 +34,7 @@ namespace Hasso.Cli.Debugger
 
             if (launchBrowser)
             {
-                var startupUri = new Uri(hostUri, "/app");
+                var startupUri = new Uri(hostUrl, "/app");
                 OpenBrowser(startupUri);
             }
 

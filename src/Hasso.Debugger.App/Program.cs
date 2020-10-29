@@ -8,18 +8,15 @@ using System.Reflection;
 
 namespace Hasso.Debugger.App
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Program
     {
-
         protected Program()
         {
-
         }
 
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
 
         public static IHostBuilder CreateHostBuilder(string[]? args = null, Action<IWebHostBuilder>? configure = null, ILogger? logger = null)
         {
@@ -50,4 +47,5 @@ namespace Hasso.Debugger.App
         }
             
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

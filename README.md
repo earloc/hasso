@@ -118,7 +118,7 @@ This can come in handy, when you´re playing around with new automations or scri
 Seting up the debugger to recieve calls instead of the actual devices currently involves some branching within scripts and automations, which I might cover in a later ost or update of this readme.
 
 Stay tuned for updates.
-
+![hasso-debugger-demo](assets/hasso-debugger-demo.gif)
 
 # But...why?
 

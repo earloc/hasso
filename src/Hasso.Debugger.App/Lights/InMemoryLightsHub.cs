@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace Hasso.Debugger.App.Lights
 {
-    public class InMemoryLightsHub : ILightsHub
+    internal class InMemoryLightsHub : ILightsHub
     {
 
         private readonly IDictionary<string, ILight> lights = new Dictionary<string, ILight>();
