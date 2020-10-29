@@ -9,12 +9,6 @@
             api-controller for messing around with lights
             </summary>
         </member>
-        <member name="M:Hasso.Debugger.App.Lights.LightController.#ctor(Hasso.Debugger.App.Lights.ILightsHub)">
-            <summary>
-            
-            </summary>
-            <param name="lights"></param>
-        </member>
         <member name="M:Hasso.Debugger.App.Lights.LightController.Toggle(System.String)">
             <summary>
             Toggles a light. Will create a new light on demand in adventure mode/>

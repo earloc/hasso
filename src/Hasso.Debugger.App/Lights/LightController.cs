@@ -11,17 +11,13 @@ namespace Hasso.Debugger.App.Lights
     {
         private readonly ILightsHub lights;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lights"></param>
         internal LightController(ILightsHub lights)
         {
             this.lights = lights;
         }
 
         /// <summary>
-        /// Toggles a light. Will create a new light on demand in adventure mode/>
+        /// Toggles a light.
         /// </summary>
         /// <param name="id">light.office_1</param>
         /// <returns>the current state of the light (true, false)</returns>
@@ -30,7 +26,7 @@ namespace Hasso.Debugger.App.Lights
         public bool Toggle(string id) => lights[id].Toggle();
 
         /// <summary>
-        /// Turns off a light. Will create a new light on demand in adventure mode/>
+        /// Turns off a light.
         /// </summary>
         /// <param name="id">>light.office_1</param>
         /// <returns>the current state of the light (true, false)</returns>
@@ -39,7 +35,7 @@ namespace Hasso.Debugger.App.Lights
         public bool Off(string id) => lights[id].IsEnabled = false;
 
         /// <summary>
-        /// Turns on a light. Will create a new light on demand in adventure mode/>
+        /// Turns on a light.
         /// </summary>
         /// <param name="id">>light.office_1</param>
         /// <returns>the current state of the light (true, false)</returns>

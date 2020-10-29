@@ -9,7 +9,7 @@ namespace Hasso.Debugger.App.Scenes
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    internal class SceneController
+    public class SceneController
     {
         private readonly IScenesHub scenes;
         
